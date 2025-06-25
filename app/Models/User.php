@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role','salle_id'
+        'role','salle_id','is_first_connected'
     ];
 
     /**

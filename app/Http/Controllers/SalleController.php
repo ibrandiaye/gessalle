@@ -41,16 +41,22 @@ class SalleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-        { $request->validate([
-
-            'nom' => 'required|string',
-
+    {
+         $this->validate($request, [
+        'nom' => 'required',
+        'adresse' => 'required',
+        'telephone' => 'required',
+        'image' => 'required',
+        ], [
+            'nom.required' => 'Le nom est obligatoire.',
+            'adresse.required' => 'L\'adresse est obligatoire obligatoire.',
+            'telephone.required' => 'Le téléphone est obligatoire.',
+            'image.required' => 'Le logo est obligatoire.',
         ]);
-
-      /*  $imageName = time().'.'.$request->img->extension();
-        $request->img->move(public_path('images'), $imageName);
-        $request->merge(['image'=>$imageName]);
-        /* Store $imageName name in DATABASE from HERE */
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('logo'), $imageName);
+        $request->merge(['logo'=>$imageName]);
+        /* Store $imageName name in DATABASE from HERE  */
         $salle = $this->salleRepository->store($request->all());
         return redirect('salle');
 
@@ -89,8 +95,14 @@ class SalleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->image)
+        {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('logo'), $imageName);
+            $request->merge(['logo'=>$imageName]);
+        }
         $this->salleRepository->update($id, $request->all());
-         return redirect('salle');
+        return redirect('salle');
     }
 
     /**
@@ -103,5 +115,11 @@ class SalleController extends Controller
     {
         $this->salleRepository->destroy($id);
         return redirect('salle');
+    }
+
+    public function editEtat($id,$etat)
+    {
+        $this->salleRepository->editEtat($id,$etat);
+         return redirect('salle');
     }
 }

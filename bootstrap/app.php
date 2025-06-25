@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\IsAdmin;
+use App\Http\Middleware\IsFirstConnected;
+use App\Http\Middleware\IsSuperAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -11,7 +14,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+       /* $middleware->use([IsFirstConnected::class,
+    IsAdmin::class,IsSuperAdmin::class]);*/
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

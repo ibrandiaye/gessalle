@@ -10,6 +10,6 @@ class Salle extends Model
         'nom',
         'adresse',
         'logo',
-        'telephone','admin_user_id'
+        'telephone','admin_user_id','etat'
     ];
 }

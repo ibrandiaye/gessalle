@@ -10,6 +10,15 @@ class Licence extends Model
         'salle_id',
         'type',
         'date_debut',
-        'date_fin','montant','statut'
+        'date_fin','statut','plan_id'
     ];
+
+    public function salle()
+    {
+        return $this->belongsTo(Salle::class);
+    }
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
+    }
 }

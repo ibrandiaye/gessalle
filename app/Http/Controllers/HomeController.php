@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\LicenceRepository;
+use App\Repositories\SalleRepository;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -11,9 +13,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    protected $salleRepository;
+    protected $licenceRepository;
+    public function __construct(SalleRepository $salleRepository,LicenceRepository $licenceRepository)
     {
-        $this->middleware('auth');
+       // $this->middleware('auth');
+       $this->licenceRepository = $licenceRepository;
+       $this->salleRepository = $salleRepository;
     }
 
     /**
@@ -23,6 +29,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $nbSalleActive = $this->salleRepository->nbSalleByEtat("active");
+        $nbSalleInactive = $this->salleRepository->nbSalleByEtat("inactive");
+        $nbLicenceActive = $this->licenceRepository->nbLicenceByEtat("active");
+        $nbLicenceInactive = $this->licenceRepository->nbLicenceByEtat("expire");
+        $chiffreAffaire = $this->licenceRepository->chiffreAffaire();
+        return view('home',compact("nbSalleActive","nbSalleInactive",
+            "nbLicenceActive","nbLicenceInactive","chiffreAffaire"));
     }
 }
