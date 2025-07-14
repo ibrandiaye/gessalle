@@ -93,6 +93,54 @@
                 </div><!--end card-->
             </div><!--end col-->
         </div><!--end row-->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+
+                         <div style="width: 800px;"><canvas id="acquisitions"></canvas></div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
  </div>
+@endsection
+@section("script")
+<script>
+      var label = [];
+    var donnee = [];
+     @foreach($chiffreAffaireParClient as $chiffreAffaireParClien)
+        label.push('{{$chiffreAffaireParClien->nom}}');
+        donnee.push({{$chiffreAffaireParClien->montant}});
+    @endforeach
+  new Chart(
+    document.getElementById('acquisitions'),
+    {
+      type: 'bar',
+      options: {
+        animation: false,
+        plugins: {
+          legend: {
+            display: false
+          },
+          tooltip: {
+            enabled: false
+          }
+        }
+      },
+      data: {
+        labels: label,
+        datasets: [
+          {
+            label: 'Chiffre d\'affaire',
+            data: donnee
+          }
+        ]
+      }
+    }
+  );
+</script>
 @endsection

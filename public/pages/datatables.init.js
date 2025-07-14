@@ -13,7 +13,13 @@ $(document).ready(function() {
         lengthChange: false,
         buttons: ['copy', 'excel', 'pdf', 'colvis']
     });
+    var table1 = $('#datatable-buttons1').DataTable({
+        lengthChange: false,
+        buttons: ['copy', 'excel', 'pdf', 'colvis']
+    });
 
-    table.buttons().container()
+    table1.buttons().container()
+        .appendTo('#datatable-buttons1_wrapper .col-md-6:eq(0)');
+        table.buttons().container()
         .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
 } );

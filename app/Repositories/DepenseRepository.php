@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Depense;
+use Illuminate\Support\Facades\DB;
 
 class DepenseRepository extends RessourceRepository{
 
@@ -9,4 +10,25 @@ class DepenseRepository extends RessourceRepository{
     {
         $this->model = $depense;
     }
+
+    public function sumDepenseBySalle($salle)
+    {
+        return DB::table("depenses")
+        ->where('salle_id',$salle)
+        ->sum("depenses.montant");
+    }
+    public function getDepenseBySalle($salle)
+    {
+        return Depense::with(["employe"])
+        ->where("salle_id",$salle)
+        ->get();
+    }
+public function getDepenseBySalleAndDate($salle,$date_debut,$date_fin)
+    {
+        return Depense::with(["employe"])
+        ->where("salle_id",$salle)
+        ->whereBetween("created_at",[$date_debut,$date_fin])
+        ->get();
+    }
+
 }

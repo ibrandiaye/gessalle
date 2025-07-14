@@ -1,22 +1,44 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        <title>MI 20205</title>
+        <meta content="Admin Dashboard" name="description" />
+        <meta content="Mannatthemes" name="author" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Confirm Password') }}</div>
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-                <div class="card-body">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/icons.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
+
+    </head>
+    <body>
+
+
+    <!-- Begin page -->
+    <div class="accountbgs"></div>
+    <div class="wrapper-page">
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-center">
+                      <a href="#" class="logo logo-admin"><img src="{{ asset('images/logo.png') }} " height="150" alt="logo"></a>
+                </div>
+
+                <div class="px-3 pb-3">
                     {{ __('Please confirm your password before continuing.') }}
 
                     <form method="POST" action="{{ route('password.confirm') }}">
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
@@ -41,9 +63,28 @@
                             </div>
                         </div>
                     </form>
-                </div>
+                 </div>
+
             </div>
         </div>
     </div>
-</div>
-@endsection
+
+
+
+        <!-- jQuery  -->
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/popper.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/modernizr.min.js') }}"></script>
+        <script src="{{ asset('js/detect.js') }}"></script>
+        <script src="{{ asset('js/fastclick.js') }}"></script>
+        <script src="{{ asset('js/jquery.blockUI.js') }}"></script>
+        <script src="{{ asset('js/waves.js') }}"></script>
+        <script src="{{ asset('js/jquery.nicescroll.js') }}"></script>
+
+        <!-- App js -->
+        <script src="{{ asset('js/app.js') }}"></script>
+
+
+    </body>
+</html>

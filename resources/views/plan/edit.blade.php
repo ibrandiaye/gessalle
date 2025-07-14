@@ -22,7 +22,7 @@
             <div class="clearfix"></div>
         </div>
 
-        <form method="POST" action="{{ route('plan.update', $plan->id) }}">
+        <form method="POST" action="{{ route('plan.update', $plan->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
              <div class="card ">
@@ -45,6 +45,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
+                                        <label>Type</label>
+                                        <select class="form-control" name="type" required="">
+                                            <option value="">Selectionner</option>
+                                            <option value="abonnement"  {{ $plan->type=="abonnement" ? "selected" : "" }} >Abonnement</option>
+                                            <option value="sms" {{ $plan->type=="sms" ? "selected" : "" }} >sms</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nombre de jours </label>
                                             <input type="number" name="nb_jour"  value="{{ $plan->nb_jour }}" class="form-control"required>
@@ -57,7 +66,12 @@
                                             <input  type="number" name="montant"  value="{{ $plan->montant }}" class="form-control"required>
                                         </div>
                                     </div>
-
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Image </label>
+                                            <input type="file" name="image"   class="form-control"  required>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="row float-right ">

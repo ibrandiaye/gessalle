@@ -37,7 +37,7 @@
         <div class="card-header">
             LISTE DES PLANS
             <div class="float-right">
-                <a href="{{ route('plan.create') }}" class="btn btn-primary">Créer un plan</a>
+                <a href="{{ route('plan.create') }}" class="btn btn-primary">Ajouter un plan</a>
             </div>
         </div>
             <div class="card-body">
@@ -47,8 +47,10 @@
                         <tr>
                             <th>#</th>
                             <th>Intitule </th>
-                            <th>Nombre de jour </th>
+                             <th>Type </th>
+                            <th>Nombre de jour  / SMS</th>
                             <th>Montant</th>
+                            <th>Statut</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -57,9 +59,21 @@
                         <tr>
                             <td>{{ $plan->id }}</td>
                             <td>{{ $plan->intitule }}</td>
+                             <td>{{ $plan->type }}</td>
                             <td>{{ $plan->nb_jour}}</td>
                             <td>{{ $plan->montant}}</td>
+                            <td>@if($plan->statut=="active")
+                                    <span class="badge badge-success">{{ $plan->statut }}</span>
+                                @else
+                                    <span class="badge badge-danger">{{ $plan->statut }}</span>
+                                @endif
+                            </td>
                             <td>
+                                @if($plan->statut=="active")
+                                    <a href="{{ route('updatePlanByEtat', ["id"=>$plan->id,"statut"=>"desactive"]) }}" role="button" class="btn btn-info" title="Changer Etat"><i class="ion-arrow-swap" title="Changer Etat"  ></i></a>
+                                @else
+                                    <a href="{{ route('updatePlanByEtat', ["id"=>$plan->id,"statut"=>"active"]) }}" role="button" class="btn btn-info" title="Changer Etat"><i class="ion-arrow-swap" title="Changer Etat"  ></i></a>
+                                @endif
                                 <a href="{{ route('plan.edit', $plan->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 <form method="POST"
                                     action="{{ route('plan.destroy', $plan->id) }}"

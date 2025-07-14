@@ -46,4 +46,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function salle()
+    {
+        return $this->belongsTo(Salle::class);
+    }
+    public function modifierMotdePasse()
+    {
+        return view("user.modifier_password");
+    }
 }

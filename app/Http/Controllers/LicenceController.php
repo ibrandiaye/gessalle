@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Licence;
 use App\Repositories\LicenceRepository;
 use App\Repositories\PlanRepository;
 use App\Repositories\SalleRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LicenceController extends Controller
 {
@@ -28,7 +30,16 @@ class LicenceController extends Controller
      */
     public function index()
     {
-        $licences = $this->licenceRepository->getAll();
+        $user = Auth::user();
+        if($user->role=="superadmin")
+        {
+            $licences = $this->licenceRepository->getAll();
+
+        }
+        elseif($user->role=="admin")
+        {
+            $licences = $this->licenceRepository->getLicenceBySalle($user->salle_id);
+        }
         return view('licence.index',compact('licences'));
     }
 
@@ -52,6 +63,7 @@ class LicenceController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
         'date_debut' => 'required|date',
         //'date_fin' => 'required|date',
@@ -59,9 +71,13 @@ class LicenceController extends Controller
         'salle_id' => 'required',
         'plan_id' => 'required',
         ] );
-
+        $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($request->salle_id,"active");
+        if(!empty($licenceAnterieur))
+        {
+            return redirect()->back()->withErrors("Vous avez déjà une licence active");
+        }
         $plan = $this->planRepository->getById($request->plan_id);
-        $date_fin = $date = Carbon::parse($request->date_debut)->addDays($plan->nb_jour);
+        $date_fin =  Carbon::parse($request->date_debut)->addDays($plan->nb_jour);
         $request->merge(['date_fin'=>$date_fin]);
         $licence = $this->licenceRepository->store($request->all());
         return redirect('licence');
@@ -118,7 +134,71 @@ class LicenceController extends Controller
         $this->licenceRepository->destroy($id);
         return redirect('licence');
     }
-        //
+
+     public function createBySalle($salle_id)
+    {
+        $plans = $this->planRepository->getAll();
+        return view('licence.add-by-salle',compact("salle_id","plans"));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeBySalle(Request $request)
+    {
+
+        $this->validate($request, [
+        'date_debut' => 'required|date',
+        //'date_fin' => 'required|date',
+        'statut' => 'required|string',
+        'plan_id' => 'required',
+        ] );
+        $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($request->salle_id,"active");
+        if(!empty($licenceAnterieur))
+        {
+            return redirect()->back()->withErrors("Vous avez déjà une licence active");
+        }
+        $plan = $this->planRepository->getById($request->plan_id);
+        $date_fin =  Carbon::parse($request->date_debut)->addDays($plan->nb_jour);
+        $request->merge(['date_fin'=>$date_fin]);
+        $licence = $this->licenceRepository->store($request->all());
+        return redirect('licence');
+
+    }
+    public function createBySalleAndPlan($plan_id,$type)
+        {
+             $user = Auth::user();
+            $plan = $this->planRepository->getById($plan_id);
+
+            if($type=="abonnement")
+            {
+
+                $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
+                if(!empty($licenceAnterieur))
+                {
+                    return redirect()->back()->withErrors("Vous avez déjà une licence active");
+                }
+
+                $licence = new Licence();
+                $licence->date_debut = today();
+                $licence->date_fin =Carbon::parse(today())->addDays($plan->nb_jour);
+                $licence->statut = "active";
+                $licence->salle_id = $user->salle_id;
+                $licence->montant = $plan->montant;
+                $licence->plan_id = $plan->id;
+                $licence->save();
+            }
+            else
+            {
+                $this->salleRepository->updateQuantiteMessage($user->salle_id,$plan->nb_jour + $user->salle->ct_sms);
+            }
+
+
+            return redirect("home");
+        }
 
 
 }

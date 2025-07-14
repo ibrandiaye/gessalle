@@ -35,20 +35,25 @@
             @endforeach
         @endif
         <div class="card">
+            <div class="card-header text-center">Bienvenue dans la plateforme de gestion des salles de sport. <br>
+            @if (Auth::user()->salle_id && Auth::user()->salle->essai=="oui")
+            Vous bénéficiez dès maintenant d’une période d’essai gratuite de <b  style="color: red;"> {{ $nbJour }} jours </b> pour découvrir toutes les fonctionnalités de la plateforme et optimiser la gestion de votre salle de sport.
+            @endif
+            </div>
+
             <div class="card-body">
 
                 <div class="text-center">
-                    {{--  <a href="index.html" class="logo logo-admin"><img src="assets/images/e-logo.png" height="20" alt="logo"></a>  --}}
+                   <p>Modifier votre de passe</p>
                 </div>
 
                 <div class="px-3 pb-3">
                     <form method="POST" action="{{ route('user.password.update') }}">
                         @csrf
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mot de passe') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <div class="col-md-12">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Mot de passe">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -58,10 +63,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirmer votre mot de passe') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="col-md-12">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Répétez Votre mot de passe">
                             </div>
                         </div>
 
@@ -69,7 +73,7 @@
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                   Se Connecter
+                                   Modifier
                                 </button>
 
 

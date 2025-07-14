@@ -47,6 +47,14 @@ class PlanController extends Controller
         'nb_jour' => 'required|integer',
         'montant' => 'required|integer',
         ], );
+        if($request->image)
+        {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('photo'), $imageName);
+            $request->merge(['photo'=>$imageName]);
+        }
+
+
         $plan = $this->planRepository->store($request->all());
         return redirect('plan');
 
@@ -85,6 +93,12 @@ class PlanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->image)
+        {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('photo'), $imageName);
+            $request->merge(['photo'=>$imageName]);
+        }
         $this->planRepository->update($id, $request->all());
         return redirect('plan');
     }
@@ -100,4 +114,16 @@ class PlanController extends Controller
         $this->planRepository->destroy($id);
         return redirect('plan');
     }
+     public function indexClient()
+    {
+        $plans = $this->planRepository->getAll();
+        return view('plan.liste',compact('plans'));
+    }
+
+    public function updatePlanByEtat($id,$statut)
+    {
+        $this->planRepository->updatePlanByEtat($id,$statut);
+        return redirect()->back()->with("success"," Mise à jour avec succée");
+    }
+
 }

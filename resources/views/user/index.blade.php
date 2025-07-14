@@ -37,7 +37,7 @@
         <div class="card-header">
             LISTE DES UTILISATEURS
             <div class="float-right">
-                <a href="{{ route('user.create') }}" class="btn btn-primary">Créer un utilisateur</a>
+                <a href="{{ route('user.create') }}" class="btn btn-primary">Ajouter un utilisateur</a>
             </div>
         </div>
             <div class="card-body">
@@ -71,6 +71,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
+
 
                             </td>
 

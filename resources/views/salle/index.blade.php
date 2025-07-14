@@ -41,7 +41,7 @@
                 <div class="card-header">
                     LISTE DES SALLES DE SPORT
                     <div class="float-right">
-                        <a href="{{ route('salle.create') }}" class="btn btn-primary">Créer une salle de sport</a>
+                        <a href="{{ route('salle.create') }}" class="btn btn-primary">Ajouter une salle de sport</a>
                     </div>
                 </div>
                     <div class="card-body">
@@ -55,6 +55,7 @@
                                     <th>Adresse</th>
                                     <th>Téléphone</th>
                                     <th>Etat</th>
+                                    <th>Essai</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -62,7 +63,7 @@
                             @foreach ($salles as $salle)
                                 <tr>
                                     <td>{{ $salle->id }}</td>
-                                    <td> <img  height="40px" src="{{ asset('logo/'.$salle->logo) }}"></td>
+                                    <td> <img class="img img-rounded" height="40px" src="{{ asset('logo/'.$salle->logo) }}"></td>
                                     <td>{{ $salle->nom }}</td>
                                     <td>{{ $salle->adresse}}</td>
                                     <td>{{ $salle->telephone}}</td>
@@ -73,7 +74,9 @@
                                             <span class="badge badge-danger">{{ $salle->etat }}</span>
                                         @endif
                                     </td>
+                                    <td>{{ $salle->essai }}</td>
                                     <td>
+                                        <a href="{{ route('createBySalle', $salle->id) }}" role="button" class="btn btn-info"><i class="fas fa-database" title="Ajouter Licence"></i></a>
                                          @if($salle->etat=="active")
                                             <a href="{{ route('edit.etat', ["id"=>$salle->id,"etat"=>"inactive"]) }}" role="button" class="btn btn-info" title="Changer Etat"><i class="ion-arrow-swap" title="Changer Etat"  ></i></a>
                                         @else

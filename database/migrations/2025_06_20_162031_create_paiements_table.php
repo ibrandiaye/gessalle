@@ -13,18 +13,15 @@ return new class extends Migration
     {
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
-            $table->date("date_debut");
-            $table->date("date_fin");
-            $table->text("commentaire")->nullable();
-            $table->enum("etat",['active','expirée','suspendue']);
-            $table->unsignedBigInteger("client_id");
-            $table->foreign("client_id")
+            $table->date("date_paiement");
+            $table->integer("montant");
+            $table->text("reference");
+            $table->enum("type_paiement",['OM','Wave','espece']);
+            $table->unsignedBigInteger("souscription_id");
+            $table->foreign("souscription_id")
             ->references("id")
-            ->on("clients");
-            $table->unsignedBigInteger("offre_id");
-            $table->foreign("offre_id")
-            ->references("id")
-            ->on("offres");
+            ->on("souscriptions");
+
             $table->timestamps();
         });
     }

@@ -10,6 +10,11 @@ class Depense extends Model
         'libelle',
         'montant',
         'date_depense',
-        'description','salle_id','employe_id'
+       /* 'description',*/'salle_id','employe_id'
     ];
+
+    public function employe()
+    {
+        return $this->belongsTo(Employe::class);
+    }
 }

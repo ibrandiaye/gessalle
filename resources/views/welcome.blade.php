@@ -20,6 +20,7 @@
         <link href="{{asset('plugins/datatables/buttons.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
         <!-- Responsive datatable examples -->
         <link href="{{asset('plugins/datatables/responsive.bootstrap4.min.css') }}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('css/fab.css') }}" rel="stylesheet" type="text/css">
 
         @yield("css")
 
@@ -44,9 +45,9 @@
                 <div class="topbar-left">
                     <div class="text-center">
                         <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Zoter</a>-->
-                      {{--    <a href="index.html" class="logo">
-                            <img src="{{ asset('images/logo-lg.png') }}" alt="" class="logo-large">
-                        </a>  --}}
+                         <a href="index.html" class="logo">
+                            <img src="{{ asset('images/logo3.jpg') }}" alt="" height="50">
+                        </a>
                     </div>
                 </div>
 
@@ -56,6 +57,9 @@
                         <ul>
 
                             <li class="menu-title">
+                                @php
+                                    $user = Auth::user();
+                                @endphp
 
                              <li>
                                     <a href="{{ route('home') }}">
@@ -63,194 +67,72 @@
                                     </a>
                                 </li>
 
-                                 {{--   <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect par Centre de vote </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('rtscentre.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('rtscentre.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect par Bureau de vote </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('rtslieu.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('rtslieu.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect par commune </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('rtscommune.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('rtscommune.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect par Departement </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('rtsdepartement.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('rtsdepartement.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-title">
-                                    <li>
-                                        <a href="{{ route('home') }}">
-                                        <i class="mdi mdi-airplay"></i> DIASPORA
-                                        </a>
-                                    </li>
 
-                                    <li class="has_sub">
-                                        <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect par Centre de Vote</span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{{ route('rtscentree.create') }}"> Ajouter</a></li>
-                                            <li><a href="{{ route('rtscentree.index') }}">Lister</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_sub">
-                                        <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect Par Bureau de Vote </span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{{ route('rtslieue.create') }}"> Ajouter</a></li>
-                                            <li><a href="{{ route('rtslieue.index') }}">Lister</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has_sub">
-                                        <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collect Par Pays </span></a>
-                                        <ul class="list-unstyled">
-                                            <li><a href="{{ route('rtspays.create') }}"> Ajouter</a></li>
-                                            <li><a href="{{ route('rtspays.index') }}">Lister</a></li>
-                                        </ul>
-                                    </li>
-
-                                <li class="menu-title">Menu</li>
-                                    <li>
-                                        <a href="{{ route('home') }}">
-                                        <i class="mdi mdi-airplay"></i> Configuration
-                                    </a>
+                             @if($user->role=="superadmin")
+                                <li >
+                                    <a href="{{ route('user.index') }}" ><i class="mdi mdi-account-circle"></i><span>Utilisateur </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Utilisateur </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('user.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('user.index') }}">Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('salle.index') }}" ><i class="mdi mdi-home"></i><span>Salle </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Candidat </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('candidat.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('candidat.index') }}">Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('licence.index') }}" ><i class="mdi mdi-clipboard-text"></i><span>Licence </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Region </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('region.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('region.index') }}">Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('plan.index') }}" ><i class="ion-social-usd"></i><span>Plan </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Departement </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('departement.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('departement.index') }}"> Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('configuration.index') }}" ><i class="mdi mdi-image-filter-vintage"></i><span>Configuration </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Arrondissement </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('arrondissement.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('arrondissement.index') }}">Lister</a></li>
-                                    </ul>
+                            @elseif($user->role=="admin")
+                                <li >
+                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Client </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Commune </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('commune.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('commune.index') }}">Lister</a></li>
-                                    </ul>
+                                  <li >
+                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Souscription </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Collecteur </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('collecteur.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('collecteur.index') }}">Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Depense </span></a>
                                 </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Juridiction </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('juridiction.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('juridiction.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Pays </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('pays.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('pays.index') }}"> Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-map-marker-multiple"></i><span>Localite </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('localite.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('localite.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Centre de Vote National</span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('centrevote.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('centrevote.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Bureau de vote National</span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('lieuvote.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('lieuvote.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Centre de Vote Etrangers </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('centrevotee.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('centrevotee.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Bureau de vote Etrangers </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('lieuvotee.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('lieuvotee.index') }}">Lister</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><i class="mdi mdi-account-circle"></i><span>Heure de collecte </span></a>
-                                    <ul class="list-unstyled">
-                                        <li><a href="{{ route('heure.create') }}"> Ajouter</a></li>
-                                        <li><a href="{{ route('heure.index') }}">Lister</a></li>
-                                    </ul>
+                                <li >
+                                    <a href="{{ route('employe.index') }}" ><i class="mdi mdi-account"></i><span>Employe </span></a>
                                 </li>
 
- --}}
+                                <li >
+                                    <a href="{{ route('offre.index') }}" ><i class="ion-social-usd"></i><span>Offre </span></a>
+                                </li>
 
-                            <li >
-                                <a href="{{ route('user.index') }}" ><i class="mdi mdi-account-circle"></i><span>Utilisateur </span></a>
-                            </li>
-                            <li >
-                                <a href="{{ route('salle.index') }}" ><i class="mdi mdi-home"></i><span>Salle </span></a>
-                            </li>
-                            <li >
-                                <a href="{{ route('licence.index') }}" ><i class="mdi mdi-clipboard-text"></i><span>Licence </span></a>
-                            </li>
-                             <li >
-                                <a href="{{ route('plan.index') }}" ><i class="ion-social-usd"></i><span>Plan </span></a>
-                            </li>
+                                <li >
+                                    <a  href="{{ route('sms.index') }}"  ><i class="mdi mdi-email"></i><span> Sms </span></a>
+                                </li>
+                                 <li >
+                                    <a href="{{ route('indexClient') }}" ><i class="mdi mdi-cart"></i><span>Boutique </span></a>
+                                </li>
+                                 <li >
+                                    <a href="{{ route('rapport') }}" ><i class="mdi mdi-poll"></i><span>Rapport </span></a>
+                                </li>
 
+                                @elseif($user->role=="employe")
+                                 <li >
+                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Client </span></a>
+                                </li>
+                                  <li >
+                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Souscription </span></a>
+                                </li>
+                                <li >
+                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Depense </span></a>
+                                </li>
+
+                            @endif
                         </ul>
+
                     </div>
-                    <div class="clearfix"></div>
+
+                    <div class="clearfix">
+
+                    </div>
                 </div> <!-- end sidebarinner -->
+
             </div>
             <!-- Left Sidebar End -->
 
@@ -267,8 +149,15 @@
 
                             <ul class="list-inline float-right mb-0">
                                 <!-- language-->
+                                 <li class="list-inline-item " style="color: white;">
+                                   @if($user->salle_id)
 
+                                  {{ $user->salle->nom }}
+
+                                   @endif
+                                </li>
                                 <li class="list-inline-item dropdown notification-list">
+
                                     <a class="nav-link dropdown-toggle arrow-none waves-effect nav-user" data-toggle="dropdown" href="#" role="button"
                                        aria-haspopup="false" aria-expanded="false">
                                         <img src="{{ asset('images/users/avatar-1.jpg') }}" alt="user" class="rounded-circle">
@@ -278,8 +167,10 @@
                                         <div class="dropdown-item noti-title">
                                             <h5>Bienvenue</h5>
                                         </div>
-
-                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                        <a class="dropdown-item notify-item"  data-toggle="modal" data-target="#exampleModalform2{{$user->id}}">
+                                            <i class="mdi mdi-account-key" title="Modifier mot de passe"></i> Changer votre <br> Mot de passe
+                                        </a>
+                                        <a class="dropdown-item notify-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                                      <i class="mdi mdi-logout m-r-5 text-muted"></i>{{ __('Deconnexion') }}
@@ -288,6 +179,9 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+
+
+
                                     </div>
                                 </li>
 
@@ -314,7 +208,7 @@
 
                            @yield("content")
                             <!-- Modal -->
-                          {{--   <div class="modal fade" id="exampleModalform2{{Auth::user()->id}}" tabindex="-1" role="dialog">
+                             <div class="modal fade" id="exampleModalform2{{Auth::user()->id}}" tabindex="-1" role="dialog">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
@@ -327,7 +221,6 @@
                                             @csrf
                                         <div class="modal-body">
 
-                                            <input type="hidden" name="id" value="{{Auth::user()->id}}">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
@@ -347,15 +240,73 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            <button type="submint" class="btn btn-primary">Modifier mot de passe</button>
+                                            <button type="submint" class="btn btn-warning">Modifier mot de passe</button>
                                         </div>
                                         </form>
                                     </div>
                                 </div>
-                            </div> --}}
+                            </div>
+
+                             <!-- Modal -->
+                             <div class="modal fade" id="exampleModalform2Ticket" tabindex="-1" role="dialog">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title text-center">Générer ticket Rapide</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{ route('souscription.store.rapide') }}" method="POST">
+                                            @csrf
+                                        <div class="modal-body">
+
+                                            <div class="row">
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Nom </label>
+                                                        <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control"required>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Tel </label>
+                                                        <input type="text" name="tel"  value="{{ old('tel') }}" class="form-control" >
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <label>Type Paiement</label>
+                                                    <select class="form-control" name="type_paiement" required="">
+                                                        <option value="">Selectionner</option>
+                                                        <option value="espece" {{old('type_paiement')=="espece" ? "selected" : '' }} >Espèce</option>
+                                                        <option value="OM" {{old('type_paiement')=="OM" ? "selected" : '' }} >OM</option>
+                                                        <option value="Wave" {{old('type_paiement')=="Wave" ? "selected" : '' }} >Wave</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+                                            <button type="submint" class="btn btn-primary">Valider</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                             @if($user->role!="superadmin")
+                             <button class="btn btn-primary fab"  data-toggle="modal" data-target="#exampleModalform2Ticket">
+                                 <i class="mdi mdi-file"></i>
+                            </button>
+
+                        @endif
 
 
                         </div><!-- container -->
+
 
                     </div> <!-- Page content Wrapper -->
 
@@ -399,7 +350,6 @@
 
         <!-- Datatable init js -->
         <script src="{{asset('pages/datatables.init.js') }}"></script>
-        @yield("script")
 
         <!-- App js -->
         <script src="{{asset('js/app.js') }}"></script>
@@ -407,10 +357,11 @@
         <script src="{{asset('plugins/parsleyjs/fr.js') }}"></script>
         <script src="{{asset('js/jquery.blockUI.js') }}"></script>
 
-         {{-- Chart JS
+          Chart JS
          <script src="{{asset('plugins/chart.js/chart.min.js') }}"></script>
-         <script src="{{asset('pages/chartjs.init.js') }}"></script> --}}
 
+
+        @yield("script")
 
         <script type="text/javascript">
            $(document).ready(function() {

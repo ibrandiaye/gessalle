@@ -38,37 +38,48 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Nom</label>
                                         <input type="text" name="nom" class="form-control" value="{{$salle->nom}}"   required>
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>adresse </label>
                                             <input type="text" name="adresse"  value=" {{$salle->adresse }}" class="form-control"required>
                                         </div>
                                     </div>
-                                   <div class="col-lg-6">
+                                   <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>telephone </label>
                                             <input type="text" name="telephone"  value=" {{$salle->telephone }}" class="form-control"required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>adresse </label>
                                             <input type="text" name="adresse"  value=" {{$salle->adresse }}" class="form-control"required>
                                         </div>
                                     </div>
-                                     <div class="col-lg-6">
+                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Logo </label>
                                             <input type="file" name="image"   class="form-control"  >
                                         </div>
                                     </div>
+                                    <div class="col-lg-4">
+                                        <label>Essai</label>
+                                        <select class="form-control" id="essai" name="essai" required>
+                                            <option value="">Selectionner</option>
+
+                                            <option value="oui" {{ "oui"==$salle->essai ? 'selected' : '' }}>Oui</option>
+                                             <option value="non" {{ "non"==$salle->essai ? 'selected' : '' }}>Non</option>
+
+                                        </select>
+                                    </div>
+
                                 </div>
 
 

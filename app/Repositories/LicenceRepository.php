@@ -30,4 +30,34 @@ class LicenceRepository extends RessourceRepository{
         ->where("id",$id)
         ->update(["statut"=>$etat]);
     }
+
+     public function getLicenceBySalle($salle_id)
+    {
+        return DB::table("licences")->where(['salle_id'=>$salle_id])
+        ->orderBy("id","desc")
+        ->get();
+    }
+    public function  chiffreAffaireParClient(){
+
+        return   DB::table('licences')
+        ->join('salles',"licences.salle_id","=","salles.id")
+        ->select('salles.nom' ,DB::raw('sum(licences.montant) as montant'))
+        ->groupBy('salles.nom')
+        ->get();
+
+    }
+    public function getLicenceOneBySalle($salle_id)
+    {
+        return DB::table("licences")->where(['salle_id'=>$salle_id])
+        ->orderBy("id","desc")
+        ->first();
+    }
+    public function verifLicenceByEtat($salle_id,$etat)
+    {
+        return DB::table("licences")
+        ->where("salle_id",$salle_id)
+        ->where('statut',$etat)
+        ->first();
+    }
+
 }

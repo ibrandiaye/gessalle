@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\VerifLicence;
 use App\Repositories\ClientRepository;
 use App\Repositories\SalleRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -13,6 +15,7 @@ class ClientController extends Controller
 
     public function __construct(ClientRepository $clientRepository,SalleRepository $salleRepository)
     {
+        $this->middleware([VerifLicence::class])->except(['index',"show"]);
         $this->clientRepository = $clientRepository;
         $this->salleRepository = $salleRepository;
     }
@@ -23,7 +26,8 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = $this->clientRepository->getAll();
+        $user = Auth::user();
+        $clients = $this->clientRepository->getClientBySalle($user->salle_id);
         return view('client.index',compact('clients'));
     }
 
@@ -34,6 +38,7 @@ class ClientController extends Controller
      */
     public function create()
     {
+
         return view ('client.add');
     }
 
@@ -48,9 +53,11 @@ class ClientController extends Controller
         $request->validate([
 
             'nom' => 'required|string',
-
+            'prenom' => 'required|string',
+            'date_naissance' => 'date',
         ]);
 
+        $request->merge(["salle_id"=>Auth::user()->salle_id]);
         $client = $this->clientRepository->store($request->all());
         return redirect('client');
 

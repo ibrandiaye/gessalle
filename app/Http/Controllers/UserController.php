@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Repositories\PlanRepository;
 use App\Repositories\SalleRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -13,10 +14,12 @@ class UserController extends Controller
 {
     protected $userRepository;
     protected $salleRepository;
-    public function __construct(UserRepository $userRepository,SalleRepository $salleRepository){
+    protected $planRepository;
+    public function __construct(UserRepository $userRepository,SalleRepository $salleRepository,
+    PlanRepository $planRepository){
         $this->userRepository =$userRepository;
         $this->salleRepository = $salleRepository;
-
+        $this->planRepository = $planRepository;
     }
 
     /**
@@ -69,6 +72,7 @@ class UserController extends Controller
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'role' => $request['role'],
+            'salle_id' => $request['salle_id'] ?? null,
         ]);
         return redirect('user');
 
@@ -158,8 +162,15 @@ class UserController extends Controller
 
     public function modifierMotDePasse()
     {
+        $user = Auth::user();
+        $nbJour= 0;
+        if($user->salle_id && $user->salle->essai == "oui" )
+        {
+            $plan = $this->planRepository->getByIntitule("essai");
+            $nbJour = $plan->nb_jour;
+        }
 
-        return view("user.edit-password");
+        return view("user.modifier_password",compact("nbJour"));
     }
 
 }

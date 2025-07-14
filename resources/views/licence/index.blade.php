@@ -37,7 +37,7 @@
         <div class="card-header">
             LISTE DES LICENCES
             <div class="float-right">
-                <a href="{{ route('licence.create') }}" class="btn btn-primary">Créer une licence</a>
+                <a href="{{ route('licence.create') }}" class="btn btn-primary">Ajouter une licence</a>
             </div>
         </div>
             <div class="card-body">
@@ -45,10 +45,9 @@
                 <table id="datatable-buttons" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>#</th>
                             <th>Salle </th>
-                            <th>Date début</th>
-                            <th>Date Fin</th>
+                            <th>Date </th>
+                            <th>Date </th>
                             <th>Plan </th>
                             <th>Montant </th>
                             <th>Etat </th>
@@ -58,10 +57,9 @@
                     <tbody>
                     @foreach ($licences as $licence)
                         <tr>
-                            <td>{{ $licence->id }}</td>
                             <td>{{ $licence->salle->nom }}</td>
-                            <td>{{ $licence->date_debut}}</td>
-                            <td>{{ $licence->date_fin}}</td>
+                            <td>{{ Carbon\Carbon::parse( $licence->date_debut)->format('d-m-Y')}}</td>
+                            <td>{{ Carbon\Carbon::parse( $licence->date_fin)->format('d-m-Y')}}</td>
                             <td>{{ $licence->plan->intitule}}</td>
                             <td>{{ $licence->plan->montant}}</td>
                              <td>

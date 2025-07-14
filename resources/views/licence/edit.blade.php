@@ -59,13 +59,13 @@
                                             <label>Date Fin </label>
                                             <input type="date" name="date_fin"  value="{{ $licence->date_fin }}" class="form-control"required>
                                         </div>
-                                    </div>
+                                    </div>--}}
                                      <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Montant </label>
                                             <input  type="number" name="montant"  value="{{ $licence->montant }}" class="form-control"required>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                      <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Statut </label>

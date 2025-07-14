@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign("salle_id")
             ->references("id")
             ->on("salles");
-            $table->unsignedBigInteger("employe_id");
+            $table->unsignedBigInteger("employe_id")->nullable();
             $table->foreign("employe_id")
             ->references("id")
             ->on("employes");

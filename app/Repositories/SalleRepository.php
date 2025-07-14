@@ -19,4 +19,14 @@ class SalleRepository extends RessourceRepository{
     {
         return DB::table("salles")->where('etat',$etat)->count();
     }
+    public function getSalleById($id)
+    {
+        return DB::table("salles")->where("id",$id)->first();
+    }
+
+    public function updateQuantiteMessage($id,$nb)
+    {
+        return DB::table("salles")->where("id",$id)->update(["ct_sms"=>$nb]);
+
+    }
 }

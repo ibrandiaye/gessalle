@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\VerifLicence;
 use App\Repositories\DepenseRepository;
 use App\Repositories\EmployeRepository;
 use App\Repositories\SalleRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DepenseController extends Controller
 {
@@ -16,8 +18,10 @@ class DepenseController extends Controller
     public function __construct(DepenseRepository $depenseRepository,SalleRepository $salleRepository,
     EmployeRepository $employeRepository)
     {
+
         $this->depenseRepository = $depenseRepository;
         $this->salleRepository = $salleRepository;
+        $this->middleware([VerifLicence::class])->except(['index',"show"]);
         $this->employeRepository = $employeRepository;
     }
     /**
@@ -27,7 +31,8 @@ class DepenseController extends Controller
      */
     public function index()
     {
-        $depenses = $this->depenseRepository->getAll();
+        $user = Auth::user();
+        $depenses = $this->depenseRepository->getDepenseBySalle($user->salle_id);
         return view('depense.index',compact('depenses'));
     }
 
@@ -38,7 +43,7 @@ class DepenseController extends Controller
      */
     public function create()
     {
-        $employes = $this->employeRepository->getAll();
+        $employes = $this->employeRepository->getEmployeBySalle(Auth::user()->salle_id);
         return view ('depense.add',compact("employes"));
     }
 
@@ -50,12 +55,14 @@ class DepenseController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-
-            'nom' => 'required|string',
-
-        ]);
-
+        //dd($request);
+        $this->validate($request, [
+        'libelle' => 'required',
+        'date_depense' => 'required|date',
+        'montant' => 'required|integer',
+        'employe_id' => 'required|integer',
+        ] );
+         $request->merge(["salle_id"=>Auth::user()->salle_id]);
         $depense = $this->depenseRepository->store($request->all());
         return redirect('depense');
 

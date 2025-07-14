@@ -16,7 +16,23 @@
         <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
 
     </head>
-    <body>
+    <style>
+
+    .background {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-image: url("/images/bg.jpg"); /* Remplacez par le chemin de votre image */
+                background-size: cover;
+                background-position: center;
+
+                z-index: -1; /* Pour que l'image soit derrière le contenu */
+            }
+
+    </style>
+    <body class="background">
 
 
     <!-- Begin page -->
@@ -27,7 +43,7 @@
             <div class="card-body">
 
                 <div class="text-center">
-                    {{--  <a href="index.html" class="logo logo-admin"><img src="assets/images/e-logo.png" height="20" alt="logo"></a>  --}}
+                      <a href="index.html" class="logo logo-admin"><img src="{{ asset('images/logo.png') }} " height="150" alt="logo"></a>
                 </div>
 
                 <div class="px-3 pb-3">
@@ -35,10 +51,10 @@
                         @csrf
 
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email ') }}</label>
+                            {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email ') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="col-md-12">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Votre Login" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -49,10 +65,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mot de passe') }}</label>
+                            {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mot de passe') }}</label> --}}
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="col-md-12">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Votre Mot de passe">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -62,7 +78,7 @@
                             </div>
                         </div>
 
-                        <div class="row mb-3">
+                      {{--   <div class="row mb-3">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
@@ -72,7 +88,7 @@
                                     </label>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -80,11 +96,16 @@
                                    Se Connecter
                                 </button>
 
-                              {{--    @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif  --}}
+
+                            </div>
+                            <div class="form-group text-center mt-4 pt-2">
+                                <div class="col-sm-12">
+                                    @if (Route::has('password.request'))
+                                        <a class="text-muted" href="{{ route('password.request') }}">
+                                           <i class="fa fa-lock mr-1"></i> Mot de passe oublier
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </form>

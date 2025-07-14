@@ -2,7 +2,7 @@
  Template Name: Zoter - Bootstrap 4 Admin Dashboard
  Author: Mannatthemes
  Website: www.mannatthemes.com
- File: Chart js 
+ File: Chart js
  */
 
 !function($) {
@@ -19,7 +19,7 @@
         // enable resizing matter
         $(window).resize( generateChart );
 
-        // this function produce the responsive Chart JS
+      /*   // this function produce the responsive Chart JS
         function generateChart(){
             // make chart width fit with its container
             var ww = selector.attr('width', $(container).width() );
@@ -47,7 +47,7 @@
 
         };
         // run function - render chart at first load
-        generateChart();
+        generateChart(); */
     },
     //init
     ChartJs.prototype.init = function() {
@@ -60,16 +60,16 @@
                     fill: true,
                     lineTension: 0.5,
                     backgroundColor: "rgba(40, 49, 121, 0.2)",
-                    borderColor: "#283179",
+                    borderColor: "#00AD4F",
                     borderCapStyle: 'butt',
                     borderDash: [],
                     borderDashOffset: 0.0,
                     borderJoinStyle: 'miter',
-                    pointBorderColor: "#283179",
+                    pointBorderColor: "#00AD4F",
                     pointBackgroundColor: "#fff",
                     pointBorderWidth: 1,
                     pointHoverRadius: 5,
-                    pointHoverBackgroundColor: "#283179",
+                    pointHoverBackgroundColor: "#00AD4F",
                     pointHoverBorderColor: "#3bc9f1",
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,

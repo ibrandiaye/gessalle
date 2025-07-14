@@ -12,4 +12,13 @@ class Souscription extends Model
         'date_fin','commentaire',
         'etat','client_id','offre_id'
     ];
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+    public function offre()
+    {
+        return $this->belongsTo(Offre::class);
+    }
 }

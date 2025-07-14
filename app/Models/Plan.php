@@ -10,6 +10,9 @@ class Plan extends Model
         'intitule',
         'nb_jour',
         'montant',
+        "photo",
+        "statut",
+        "type"
 
     ];
 

@@ -37,29 +37,45 @@
                                     </div>
                                 @endif
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Nom </label>
                                             <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control" required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Adresse </label>
                                             <input type="text" name="adresse"  value="{{ old('adresse') }}" class="form-control"  required>
                                         </div>
                                     </div>
-                                   <div class="col-lg-6">
+                                     <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Email </label>
+                                            <input type="email" name="email"  value="{{ old('email') }}" class="form-control"  required>
+                                        </div>
+                                    </div>
+                                   <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Téléphone </label>
                                             <input type="text" name="telephone"  value="{{ old('telephone') }}" class="form-control"  required>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Logo </label>
                                             <input type="file" name="image"   class="form-control"  required>
                                         </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label>Essai</label>
+                                        <select class="form-control" id="essai" name="essai" required>
+                                            <option value="">Selectionner</option>
+
+                                            <option value="oui" {{ "oui"==old('essai') ? 'selected' : '' }}>Oui</option>
+                                             <option value="non" {{ "non"==old('essai') ? 'selected' : '' }}>Non</option>
+
+                                        </select>
                                     </div>
 
                                 </div>

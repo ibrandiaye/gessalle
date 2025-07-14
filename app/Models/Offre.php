@@ -9,8 +9,7 @@ class Offre extends Model
 
       protected $fillable = [
         'nom',
-        'description',
         'duree','prix',
-        'description','salle_id'
+        'description','salle_id','photo','etat'
     ];
 }

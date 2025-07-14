@@ -22,7 +22,7 @@
             <div class="clearfix"></div>
         </div>
 
-        <form action="{{ route('plan.store') }}" method="POST">
+        <form action="{{ route('plan.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
              <div class="card">
                         <div class="card-header  text-center">
@@ -46,8 +46,17 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
+                                        <label>Type</label>
+                                        <select class="form-control" name="type" required="">
+                                            <option value="">Selectionner</option>
+                                            <option value="abonnement" >Abonnement</option>
+                                            <option value="sms" >sms</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6">
                                         <div class="form-group">
-                                            <label>Nombre de jours </label>
+                                            <label>Nombre de jours ou sms </label>
                                             <input type="number" name="nb_jour"  value="{{ old('nb_jour') }}" class="form-control"required>
                                         </div>
                                     </div>
@@ -58,6 +67,13 @@
                                             <input  type="number" name="montant"  value="{{ old('montant') }}" class="form-control"required>
                                         </div>
                                     </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Image </label>
+                                            <input type="file" name="image"   class="form-control"  required>
+                                        </div>
+                                    </div>
+
 
                                 </div>
 

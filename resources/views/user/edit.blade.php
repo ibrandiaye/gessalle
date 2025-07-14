@@ -26,7 +26,7 @@
             @csrf
             @method('PATCH')
              <div class="card ">
-                        <div class="card-header text-center">FORMULAIRE DE MODIFICATION Département</div>
+                        <div class="card-header text-center">FORMULAIRE DE MODIFICATION D'UN UTILISATEUR</div>
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -36,6 +36,11 @@
                                             @endforeach
                                         </ul>
                                     </div>
+                                    @if ($message = Session::get('success'))
+                                        <div class="alert alert-success">
+                                            <p>{{ $message }}</p>
+                                        </div>
+                                    @endif
                                 @endif
                                 <div class="row">
                                     <div class="col-lg-6">
