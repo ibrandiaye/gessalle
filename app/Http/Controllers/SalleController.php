@@ -134,6 +134,14 @@ class SalleController extends Controller
             $request->merge(['logo'=>$imageName]);
         }
         $this->salleRepository->update($id, $request->all());
+         $plan = $this->planRepository->getByIntitule("essai");
+        $request->merge(["salle_id"=>$id,"plan_id"=>$plan->id,"date_debut"=>today(),
+        "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
+        "role"=>"admin" ]);
+        if($request->essai=="oui")
+        {
+            $this->licenceRepository->store($request->all());
+        }
         return redirect('salle');
     }
 

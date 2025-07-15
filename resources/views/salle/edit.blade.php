@@ -22,7 +22,7 @@
             <div class="clearfix"></div>
         </div>
 
-            <form method="POST" action="{{ route('salle.update', $salle->id) }}">
+            <form method="POST" action="{{ route('salle.update', $salle->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div class="card ">
