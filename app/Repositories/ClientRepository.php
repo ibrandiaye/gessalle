@@ -24,4 +24,12 @@ class ClientRepository extends RessourceRepository{
     {
         return Client::where("salle_id",$salle)->get();
     }
+    public function getClientBySalleAndTel($salle,$tel)
+    {
+        return Client::where("salle_id",$salle)->where("tel",$tel)->first();
+    }
+     public function getClientBySalleAndName($salle,$nom)
+    {
+        return Client::where("salle_id",$salle)->where("nom",$nom)->first();
+    }
 }

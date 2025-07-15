@@ -263,12 +263,12 @@
 
                                             <div class="row">
 
-                                                <div class="col-lg-6">
+                                               {{--  <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Nom </label>
                                                         <input type="text" name="nom"  value="{{ old('nom') }}" class="form-control"required>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
 
                                                 <div class="col-lg-6">
@@ -277,7 +277,7 @@
                                                         <input type="text" name="tel"  value="{{ old('tel') }}" class="form-control" >
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-12">
+                                                <div class="col-lg-6">
                                                     <label>Type Paiement</label>
                                                     <select class="form-control" name="type_paiement" required="">
                                                         <option value="">Selectionner</option>

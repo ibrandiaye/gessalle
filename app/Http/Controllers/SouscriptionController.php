@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\VerifLicence;
+use App\Models\Client;
 use App\Repositories\ClientRepository;
 use App\Repositories\OffreRepository;
 use App\Repositories\PaiementRepository;
@@ -196,7 +197,34 @@ class SouscriptionController extends Controller
         $date_fin =  Carbon::parse(today())->addDays($offre->duree);
 
         $request->merge(["salle_id"=>$user->salle_id,'date_fin'=>$date_fin,'etat'=>'active','date_debut'=>today()]);
-        $client = $this->clientRepository->store($request->all());
+        if($request->tel)
+        {
+            $client =  $this->clientRepository->getClientBySalleAndTel($user->salle_id,$request->tel);
+            if(empty($client))
+            {
+                $client =  $this->clientRepository->getClientBySalleAndName($user->salle_id,"anonyme");
+            }
+            if(empty($client))
+            {
+                $client = new Client();
+                $client->nom = "anonyme";
+                $client->salle_id = $user->salle_id;
+                $client->save();
+            }
+        }else
+        {
+            $client =  $this->clientRepository->getClientBySalleAndName($user->salle_id,"anonyme");
+
+            if(empty($client))
+            {
+                $client = new Client();
+                $client->nom = "anonyme";
+                $client->salle_id = $user->salle_id;
+                $client->save();
+            }
+
+        }
+       // $client = $this->clientRepository->store($request->all());
         $request->merge(["client_id"=>$client->id,"offre_id"=>$offre->id]);
         $souscription = $souscription = $this->souscriptionRepository->store($request->all());
         $request->merge(["souscription_id"=>$souscription->id,'date_paiement'=>$request->date_debut,
