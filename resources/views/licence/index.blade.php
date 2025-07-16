@@ -57,7 +57,7 @@
                     <tbody>
                     @foreach ($licences as $licence)
                         <tr>
-                            <td>{{ $licence->salle->nom }}</td>
+                            <td>@if(!empty($licence->salle)){{ $licence->salle->nom }} @endif</td>
                             <td>{{ Carbon\Carbon::parse( $licence->date_debut)->format('d-m-Y')}}</td>
                             <td>{{ Carbon\Carbon::parse( $licence->date_fin)->format('d-m-Y')}}</td>
                             <td>{{ $licence->plan->intitule}}</td>
