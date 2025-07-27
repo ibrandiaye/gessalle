@@ -1,36 +1,6 @@
 <?php
 namespace App\Repositories;
 
-class RessourceRepository {
-    protected $model;
-
-    public function getPaginate($n)
-    {
-        return $this->model->paginate($n);
-    }
-    public  function getAll(){
-        return $this->model->get();
-    }
-
-    public function store(Array $inputs)
-    {
-        return $this->model->create($inputs);
-    }
-
-    public function getById($id)
-    {
-        return $this->model->findOrFail($id);
-    }
-
-    public function update($id, Array $inputs)
-    {
-        $this->getById($id)->update($inputs);
-    }
-
-    public function destroy($id)
-    {
-        $this->getById($id)->delete();
-    }
 function sendAirtimeRequest($params,$type) {
     // URL de l'API
 
@@ -55,7 +25,7 @@ function sendAirtimeRequest($params,$type) {
         'redirect_url' => $params['redirect_url'] ?? '',
         'redirect_error_url' => $params['redirect_error_url'] ?? ''
     ];
-    //dd($postData);
+
     // Initialisation de cURL
     $ch = curl_init();
 
@@ -92,4 +62,23 @@ function sendAirtimeRequest($params,$type) {
     return $decodedResponse;
 }
 
-}
+// Exemple d'utilisation
+/*try {
+    $params = [
+        'amount' => 2010,
+        'destination' => '123456789',
+        'api_key' => 'votre_cle_api',
+        'ipn_url' => 'https://votredomaine.com/ipn',
+        'service_id' => 17,
+        'custom_data' => 'vos_donnees_personnalisees',
+        'business_name_id' => 'am-xxxx',
+        'redirect_url' => 'https://votredomaine.com/success',
+        'redirect_error_url' => 'https://votredomaine.com/error'
+    ];
+
+    $response = sendAirtimeRequest($params);
+    print_r($response);
+} catch (Exception $e) {
+    echo "Erreur : " . $e->getMessage();
+}*/
+?>

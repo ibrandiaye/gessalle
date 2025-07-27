@@ -1,6 +1,30 @@
 @extends('welcome')
 @section('title', '| depense')
 
+@section("css")
+<style>
+        .payment-option {
+    padding: 15px;
+    border: 2px solid #dee2e6;
+    border-radius: 8px;
+    width: 45%;
+    transition: all 0.3s ease;
+    }
+
+    .payment-option:hover {
+    border-color: #0d6efd;
+    cursor: pointer;
+    }
+
+    .form-check-input:checked + label {
+    color: #0d6efd;
+    }
+
+    .form-check-input:checked + label img {
+    filter: brightness(0) saturate(100%) invert(34%) sepia(74%) saturate(2476%) hue-rotate(202deg) brightness(98%) contrast(101%);
+    }
+</style>
+@endsection
 
 @section('content')
 <div class="row">

@@ -10,7 +10,7 @@ class Licence extends Model
         'salle_id',
         'type',
         'date_debut',
-        'date_fin','statut','plan_id','montant'
+        'date_fin','statut','plan_id','montant','type_paiement'
     ];
 
     public function salle()

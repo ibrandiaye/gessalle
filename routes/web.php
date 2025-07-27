@@ -66,8 +66,8 @@ Route::get('/souscriptions/by/client/{client}', [SouscriptionController::class, 
 Route::get('/edit/etat/offre/{id}/{etat}', [OffreController::class, 'updateOffreByEtatAndSalle'])->name('updateOffreByEtatAndSalle')->middleware(['auth']);
 Route::get('/souscrire/plan', [PlanController::class, 'indexClient'])->name('indexClient')->middleware(['auth']);
 
-Route::get('/licence/plan/salle/{plan_id}/{type}', [LicenceController::class, 'createBySalleAndPlan'])->name('createBySalleAndPlan')->middleware(['auth',IsFirstConnected::class]);
-
+// Route::get('/licence/plan/salle/{plan_id}/{type}', [LicenceController::class, 'createBySalleAndPlan'])->name('createBySalleAndPlan')->middleware(['auth',IsFirstConnected::class]);
+Route::post('/licence/plan/salle/', [LicenceController::class, 'createBySalleAndPlan'])->name('createBySalleAndPlan')->middleware(['auth',IsFirstConnected::class]);
 
 
 Route::get('/upadate/plan/by/etat/{id}/{statut}', [PlanController::class, 'updatePlanByEtat'])->name('updatePlanByEtat')->middleware(['auth'],IsSuperAdmin::class);

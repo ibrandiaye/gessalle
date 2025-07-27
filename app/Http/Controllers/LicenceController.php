@@ -9,6 +9,8 @@ use App\Repositories\SalleRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class LicenceController extends Controller
 {
@@ -168,12 +170,23 @@ class LicenceController extends Controller
         return redirect('licence');
 
     }
-    public function createBySalleAndPlan($plan_id,$type)
+    public function createBySalleAndPlan(Request $request)
         {
-             $user = Auth::user();
-            $plan = $this->planRepository->getById($plan_id);
 
-            if($type=="abonnement")
+            //$plan_id,$type
+           // dd($request);
+
+           // dd($api_key);
+            $user = Auth::user();
+            $plan = $this->planRepository->getById($request->plan_id);
+
+            $api_key = env("API_KEY", 'PIX_22a66ce1-58f8-4587-9e6c-06e2d37f86b9');
+            $wave_service = env("WAVE", 211);
+            $orange_service = env("ORANGESN", 213);
+            $bussiness_name_id = env("BUSINESS_NAME_ID", 'am-1yw9ja8y813e0');
+            $service_id = "";
+            $app_url = env("APP_URL", 'http://127.0.0.1:8000/');
+            if($request->type=="abonnement")
             {
 
                 $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
@@ -185,11 +198,47 @@ class LicenceController extends Controller
                 $licence = new Licence();
                 $licence->date_debut = today();
                 $licence->date_fin =Carbon::parse(today())->addDays($plan->nb_jour);
-                $licence->statut = "active";
+                $licence->statut = "paiement_en_cours";
                 $licence->salle_id = $user->salle_id;
                 $licence->montant = $plan->montant;
                 $licence->plan_id = $plan->id;
+                $licence->type_paiement = $request->paymentMethod;
                 $licence->save();
+                 //dd($request->type);
+                //dd($request->paymentMethod);
+                if($request->paymentMethod=="wave")
+                {
+                    $service_id = $wave_service;
+                }
+                elseif($request->paymentMethod=="orange")
+                {
+                    $service_id = $orange_service;
+                }
+                $params = [
+                'amount' => 200 /*$plan->montant*/,
+                'destination' => $request->tel,
+                'api_key' => $api_key,
+                'ipn_url' => $app_url."",
+                'service_id' => (int)$service_id,
+                'custom_data' => $licence->id,
+                'business_name_id' => $bussiness_name_id,
+                'redirect_url' => $app_url."",
+                'redirect_error_url' => $app_url.""
+            ];
+                $payements = $this->licenceRepository->sendAirtimeRequest($params,$request->paymentMethod);
+               // dd($request->type);
+              //  dd($payements["data"]["sms_link"]);
+                if($payements["statut_code"]==200)
+                {
+                    header("Location: ".$payements["data"]["sms_link"]);
+                    exit();
+
+                }
+                else
+                {
+                    return redirect()->back()->withErrors("Erreur de paiement");
+                }
+
             }
             else
             {
@@ -200,5 +249,14 @@ class LicenceController extends Controller
             return redirect("home");
         }
 
+        public function validatePaiement(Request $request)
+        {
+            $licence_id  = $request->custom_data;
+            if($request->state=="SUCCESSFUL" && $licence_id)
+            {
+                DB::table("licences")->where("id",$licence_id)->update(["statut"=>"active"]);
+            }
+            return response()->json("ok");
+        }
 
 }

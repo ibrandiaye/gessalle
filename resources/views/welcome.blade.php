@@ -23,6 +23,7 @@
         <link href="{{asset('css/fab.css') }}" rel="stylesheet" type="text/css">
 
         @yield("css")
+        @stack('style')
 
     </head>
 
