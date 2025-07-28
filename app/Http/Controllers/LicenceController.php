@@ -185,7 +185,7 @@ class LicenceController extends Controller
             $orange_service = env("ORANGESN", 213);
             $bussiness_name_id = env("BUSINESS_NAME_ID", 'am-1yw9ja8y813e0');
             $service_id = "";
-            $app_url = env("APP_URL", 'http://127.0.0.1:8000/');
+            $app_url = env("APP_URL", 'https://sport.syntechadvanced.sn/');
             /*if($request->type=="abonnement")
             {*/
             if($request->type=="abonnement")
