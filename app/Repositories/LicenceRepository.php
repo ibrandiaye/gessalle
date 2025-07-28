@@ -49,6 +49,7 @@ class LicenceRepository extends RessourceRepository{
     public function getLicenceOneBySalle($salle_id)
     {
         return DB::table("licences")->where(['salle_id'=>$salle_id])
+        ->where("type","abonnement")
         ->orderBy("id","desc")
         ->first();
     }

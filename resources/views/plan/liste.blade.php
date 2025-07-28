@@ -125,16 +125,7 @@
                                 <div class="mb-4">
                                     <h6 class="mb-3 fw-bold text-center">Choisissez votre méthode de paiement</h6>
                                     <div class="d-flex justify-content-around align-items-center flex-wrap gap-3">
-                                        <!-- Option Wave -->
-                                        <div class="form-check payment-option">
-                                            <input class="form-check-input d-none" type="radio" name="paymentMethod" id="wavePayment" value="wave" checked>
-                                            <label class="form-check-label payment-method-card p-3 rounded-3 shadow-sm" for="wavePayment">
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <img src="{{ asset('images/wave.png') }}" alt="Wave" class="payment-logo mb-2">
-                                                    <span class="fw-medium">Wave</span>
-                                                </div>
-                                            </label>
-                                        </div>
+
 
                                         <!-- Option Orange Money -->
                                         <div class="form-check payment-option">
@@ -146,7 +137,16 @@
                                                 </div>
                                             </label>
                                         </div>
-
+                                        <!-- Option Wave wavePayment-->
+                                        <div class="form-check payment-option">
+                                            <input class="form-check-input d-none" type="radio" name="paymentMethod" id="wavePayment" value="wave" checked>
+                                            <label class="form-check-label payment-method-card p-3 rounded-3 shadow-sm" for="wavePayment">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <img src="{{ asset('images/wave.png') }}" alt="Wave" class="payment-logo mb-2">
+                                                    <span class="fw-medium">Wave SEN</span>
+                                                </div>
+                                            </label>
+                                        </div>
                                         <!-- Option Free Money -->
                                         <div class="form-check payment-option">
                                             <input class="form-check-input d-none" type="radio" name="paymentMethod" id="freePayment" value="free">
@@ -171,7 +171,7 @@
                                 </div>
 
                                 <!-- Bouton de soumission -->
-                                <div class="d-grid gap-2 mt-4 float-center">
+                                <div class="d-grid gap-2 mt-4 text-center">
                                     <button type="submit" class="btn btn-primary py-2 fw-bold rounded-pill shadow">
                                         <i class="bi bi-lock-fill me-2"></i> Payer maintenant ({{ number_format($plan->montant, 0, ',', ' ') }} FCFA)
                                     </button>

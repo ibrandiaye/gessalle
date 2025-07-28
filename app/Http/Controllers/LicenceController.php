@@ -186,11 +186,11 @@ class LicenceController extends Controller
             $bussiness_name_id = env("BUSINESS_NAME_ID", 'am-1yw9ja8y813e0');
             $service_id = "";
             $app_url = env("APP_URL", 'http://127.0.0.1:8000/');
-            if($request->type=="abonnement")
-            {
+            /*if($request->type=="abonnement")
+            {*/
 
                 $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
-                if(!empty($licenceAnterieur))
+                 if(!empty($licenceAnterieur))
                 {
                     return redirect()->back()->withErrors("Vous avez déjà une licence active");
                 }
@@ -202,6 +202,7 @@ class LicenceController extends Controller
                 $licence->salle_id = $user->salle_id;
                 $licence->montant = $plan->montant;
                 $licence->plan_id = $plan->id;
+                $licence->type = $request->type;
                 $licence->type_paiement = $request->paymentMethod;
                 $licence->save();
                  //dd($request->type);
@@ -218,7 +219,7 @@ class LicenceController extends Controller
                 'amount' => 200 /*$plan->montant*/,
                 'destination' => $request->tel,
                 'api_key' => $api_key,
-                'ipn_url' => $app_url."",
+                'ipn_url' => $app_url."valider/paiement",
                 'service_id' => (int)$service_id,
                 'custom_data' => $licence->id,
                 'business_name_id' => $bussiness_name_id,
@@ -239,11 +240,11 @@ class LicenceController extends Controller
                     return redirect()->back()->withErrors("Erreur de paiement");
                 }
 
-            }
+            /*}
             else
             {
                 $this->salleRepository->updateQuantiteMessage($user->salle_id,$plan->nb_jour + $user->salle->ct_sms);
-            }
+            }*/
 
 
             return redirect("home");
@@ -251,10 +252,22 @@ class LicenceController extends Controller
 
         public function validatePaiement(Request $request)
         {
+            //return response()->json("ok");
             $licence_id  = $request->custom_data;
             if($request->state=="SUCCESSFUL" && $licence_id)
             {
-                DB::table("licences")->where("id",$licence_id)->update(["statut"=>"active"]);
+                $licence = $this->licenceRepository->getById($licence_id);
+                if($licence->type=="abonnement")
+                {
+                     DB::table("licences")->where("id",$licence_id)->update(["statut"=>"active"]);
+                }
+                else
+                {
+                    $user = Auth::user();
+                    $plan = $this->planRepository->getById($request->plan_id);
+                    $this->salleRepository->updateQuantiteMessage($user->salle_id,$plan->nb_jour + $user->salle->ct_sms);
+                }
+
             }
             return response()->json("ok");
         }
