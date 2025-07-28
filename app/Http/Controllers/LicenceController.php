@@ -188,12 +188,14 @@ class LicenceController extends Controller
             $app_url = env("APP_URL", 'http://127.0.0.1:8000/');
             /*if($request->type=="abonnement")
             {*/
-
+            if($request->type=="abonnement")
+            {
                 $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
                  if(!empty($licenceAnterieur))
                 {
                     return redirect()->back()->withErrors("Vous avez déjà une licence active");
                 }
+            }
 
                 $licence = new Licence();
                 $licence->date_debut = today();
@@ -263,9 +265,9 @@ class LicenceController extends Controller
                 }
                 else
                 {
-                    $user = Auth::user();
-                    $plan = $this->planRepository->getById($request->plan_id);
-                    $this->salleRepository->updateQuantiteMessage($user->salle_id,$plan->nb_jour + $user->salle->ct_sms);
+
+                    $plan = $this->planRepository->getById($licence->plan_id);
+                    $this->salleRepository->updateQuantiteMessage($licence->salle_id,$plan->nb_jour + $licence->salle->ct_sms);
                 }
 
             }
