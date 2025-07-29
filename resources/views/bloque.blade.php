@@ -39,7 +39,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                        {{-- <a class="btn btn-danger mb-5 waves-effect waves-light" href="index.html">Back to Dashboard</a> --}}
+                        {{-- <a class="btn btn-danger mb-5 waves-effect waves-light" href="{{route('home')}}">Back to Dashboard</a> --}}
                     </div>
 
                 </div>

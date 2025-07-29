@@ -45,8 +45,8 @@
                 <!-- LOGO -->
                 <div class="topbar-left">
                     <div class="text-center">
-                        <!--<a href="index.html" class="logo"><i class="mdi mdi-assistant"></i> Zoter</a>-->
-                         <a href="index.html" class="logo">
+                        <!--<a href="{{route('home')}}" class="logo"><i class="mdi mdi-assistant"></i> Zoter</a>-->
+                         <a href="{{route('home')}}" class="logo">
                             <img src="{{ asset('images/logo3.jpg') }}" alt="" height="50">
                         </a>
                     </div>
@@ -87,20 +87,20 @@
                                 </li>
                             @elseif($user->role=="admin")
                                 <li >
-                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Client </span></a>
+                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Clients </span></a>
                                 </li>
                                   <li >
-                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Souscription </span></a>
+                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Tickets </span></a>
                                 </li>
                                 <li >
-                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Depense </span></a>
+                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Depenses </span></a>
                                 </li>
                                 <li >
-                                    <a href="{{ route('employe.index') }}" ><i class="mdi mdi-account"></i><span>Employe </span></a>
+                                    <a href="{{ route('employe.index') }}" ><i class="mdi mdi-account"></i><span>Employes </span></a>
                                 </li>
 
                                 <li >
-                                    <a href="{{ route('offre.index') }}" ><i class="ion-social-usd"></i><span>Offre </span></a>
+                                    <a href="{{ route('offre.index') }}" ><i class="ion-social-usd"></i><span>Offres </span></a>
                                 </li>
 
                                 <li >
@@ -110,18 +110,18 @@
                                     <a href="{{ route('indexClient') }}" ><i class="mdi mdi-cart"></i><span>Boutique </span></a>
                                 </li>
                                  <li >
-                                    <a href="{{ route('rapport') }}" ><i class="mdi mdi-poll"></i><span>Rapport </span></a>
+                                    <a href="{{ route('rapport') }}" ><i class="mdi mdi-poll"></i><span>Rapports </span></a>
                                 </li>
 
                                 @elseif($user->role=="employe")
                                  <li >
-                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Client </span></a>
+                                    <a href="{{ route('client.index') }}" ><i class="mdi mdi-account-card-details"></i><span>Clients </span></a>
                                 </li>
                                   <li >
-                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Souscription </span></a>
+                                    <a href="{{ route('souscription.index') }}" ><i class="mdi mdi-database-plus"></i><span>Tickets </span></a>
                                 </li>
                                 <li >
-                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Depense </span></a>
+                                    <a href="{{ route('depense.index') }}" ><i class="mdi mdi-square-inc-cash"></i><span>Dépenses </span></a>
                                 </li>
 
                             @endif

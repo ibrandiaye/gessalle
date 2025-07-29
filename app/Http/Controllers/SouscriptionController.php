@@ -200,14 +200,15 @@ class SouscriptionController extends Controller
         if($request->tel)
         {
             $client =  $this->clientRepository->getClientBySalleAndTel($user->salle_id,$request->tel);
-            if(empty($client))
+           /* if(empty($client))
             {
                 $client =  $this->clientRepository->getClientBySalleAndName($user->salle_id,"anonyme");
-            }
+            }*/
             if(empty($client))
             {
                 $client = new Client();
                 $client->nom = "anonyme";
+                $client->tel = $request->tel;
                 $client->salle_id = $user->salle_id;
                 $client->save();
             }

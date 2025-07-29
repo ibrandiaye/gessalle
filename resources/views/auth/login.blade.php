@@ -43,7 +43,7 @@
             <div class="card-body">
 
                 <div class="text-center">
-                      <a href="index.html" class="logo logo-admin"><img src="{{ asset('images/logo.png') }} " height="150" alt="logo"></a>
+                      <a href="{{route('home')}}" class="logo logo-admin"><img src="{{ asset('images/logo.png') }} " height="150" alt="logo"></a>
                 </div>
 
                 <div class="px-3 pb-3">

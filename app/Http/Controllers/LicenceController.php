@@ -188,6 +188,7 @@ class LicenceController extends Controller
             $app_url = env("APP_URL", 'https://sport.syntechadvanced.sn/');
             /*if($request->type=="abonnement")
             {*/
+           // $paymentMethod = $request->ppaymentMethod
             if($request->type=="abonnement")
             {
                 $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
@@ -221,7 +222,7 @@ class LicenceController extends Controller
                 'amount' => 200 /*$plan->montant*/,
                 'destination' => $request->tel,
                 'api_key' => $api_key,
-                'ipn_url' => $app_url."valider/paiement",
+                'ipn_url' => $app_url."api/valider/paiement",
                 'service_id' => (int)$service_id,
                 'custom_data' => $licence->id,
                 'business_name_id' => $bussiness_name_id,
@@ -255,10 +256,11 @@ class LicenceController extends Controller
         public function validatePaiement(Request $request)
         {
             //return response()->json("ok");
-            $licence_id  = $request->custom_data;
-            if($request->state=="SUCCESSFUL" && $licence_id)
+                       $licence_id  = $request['custom_data'];
+            if($request['state']=="SUCCESSFUL" && $licence_id)
             {
                 $licence = $this->licenceRepository->getById($licence_id);
+
                 if($licence->type=="abonnement")
                 {
                      DB::table("licences")->where("id",$licence_id)->update(["statut"=>"active"]);
@@ -268,10 +270,12 @@ class LicenceController extends Controller
 
                     $plan = $this->planRepository->getById($licence->plan_id);
                     $this->salleRepository->updateQuantiteMessage($licence->salle_id,$plan->nb_jour + $licence->salle->ct_sms);
+                    DB::table("licences")->where("id",$licence_id)->update(["statut"=>"active"]);
                 }
 
             }
             return response()->json("ok");
+
         }
 
 }

@@ -63,11 +63,12 @@ class SalleController extends Controller
         'telephone' => 'required',
         'image' => 'required',
         'essai' => 'required',
+         'email' => 'file|mimes:png,jpg,jpeg',
         ], [
             'nom.required' => 'Le nom est obligatoire.',
             'adresse.required' => 'L\'adresse est obligatoire obligatoire.',
             'telephone.required' => 'Le téléphone est obligatoire.',
-            'image.required' => 'Le logo est obligatoire.',
+
         ]);
 
         $imageName = time().'.'.$request->image->extension();
@@ -79,7 +80,7 @@ class SalleController extends Controller
         $plan = $this->planRepository->getByIntitule("essai");
         $request->merge(["salle_id"=>$salle->id,"plan_id"=>$plan->id,"date_debut"=>today(),
         "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
-        "role"=>"admin" ]);
+        "role"=>"admin","type_paiement"=>"essai","type"=>"abonnement" ]);
         if($request->essai=="oui")
         {
             $this->licenceRepository->store($request->all());
@@ -137,7 +138,7 @@ class SalleController extends Controller
          $plan = $this->planRepository->getByIntitule("essai");
         $request->merge(["salle_id"=>$id,"plan_id"=>$plan->id,"date_debut"=>today(),
         "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
-        "role"=>"admin" ]);
+        "role"=>"admin","type_paiement"=>"essai","type"=>"abonnement" ]);
         if($request->essai=="oui")
         {
             $this->licenceRepository->store($request->all());
