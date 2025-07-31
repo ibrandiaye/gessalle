@@ -61,7 +61,7 @@
                             <div class="col-9 align-self-center text-right">
                                 <div class="m-l-10">
                                     <h5 class="mt-0">{{ $depense}} </h5>
-                                     <p class="mb-0 text-muted">Dépense</p>
+                                     <p class="mb-0 text-muted">Dépense du mois  </p>
                                     {{-- <p class="mb-0 text-muted">dont  <span class="badge bg-soft-success"><i class="mdi mdi-arrow-up"></i>{{ $nbSalleActive }} actives</span>
                                     <span class="badge bg-soft-danger"><i class="mdi mdi-arrow-down"></i>{{ $nbSalleInactive }} inactives</span>
                                     </p> --}}
@@ -114,7 +114,7 @@
                             <div class="col-9 align-self-center text-right">
                                 <div class="m-l-10 ">
                                     <h5 class="mt-0">{{ $sommePaiment }}</h5>
-                                    <p class="mb-0 text-muted">Chiffre d'affaire</p>
+                                    <p class="mb-0 text-muted">Chiffre d'affaire du mois</p>
                                 </div>
                             </div>
                         </div>

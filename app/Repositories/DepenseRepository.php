@@ -15,6 +15,8 @@ class DepenseRepository extends RessourceRepository{
     {
         return DB::table("depenses")
         ->where('salle_id',$salle)
+         ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
         ->sum("depenses.montant");
     }
     public function getDepenseBySalle($salle)

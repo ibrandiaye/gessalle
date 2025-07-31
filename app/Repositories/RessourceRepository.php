@@ -1,6 +1,9 @@
 <?php
 namespace App\Repositories;
 
+use PHPUnit\Framework\Exception;
+
+
 class RessourceRepository {
     protected $model;
 
@@ -82,14 +85,35 @@ function sendAirtimeRequest($params,$type) {
     // Fermeture de la session cURL
     curl_close($ch);
 
+
     // Décodage de la réponse JSON
     $decodedResponse = json_decode($response, true);
 
+
     if (json_last_error() !== JSON_ERROR_NONE) {
-        throw new Exception("Erreur lors du décodage de la réponse JSON : " . json_last_error_msg());
+        dd(json_last_error_msg());
+        //throw new Exception("Erreur lors du décodage de la réponse JSON : " . json_last_error_msg());
     }
 
     return $decodedResponse;
 }
 
+function isMobile() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+    // Liste des mots-clés courants pour les appareils mobiles
+    $mobileKeywords = [
+        'Mobile', 'Android', 'iPhone', 'iPad', 'iPod',
+        'BlackBerry', 'Windows Phone', 'Opera Mini',
+        'IEMobile', 'Kindle', 'webOS', 'Symbian'
+    ];
+
+    foreach ($mobileKeywords as $keyword) {
+        if (stripos($userAgent, $keyword) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}
 }

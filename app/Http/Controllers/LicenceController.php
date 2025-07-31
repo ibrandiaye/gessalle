@@ -191,11 +191,11 @@ class LicenceController extends Controller
            // $paymentMethod = $request->ppaymentMethod
             if($request->type=="abonnement")
             {
-                $licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
+                /*$licenceAnterieur =   $this->licenceRepository->verifLicenceByEtat($user->salle_id,"active");
                  if(!empty($licenceAnterieur))
                 {
                     return redirect()->back()->withErrors("Vous avez déjà une licence active");
-                }
+                }*/
             }
 
                 $licence = new Licence();
@@ -229,13 +229,36 @@ class LicenceController extends Controller
                 'redirect_url' => $app_url."",
                 'redirect_error_url' => $app_url.""
             ];
+            //dd($params);
                 $payements = $this->licenceRepository->sendAirtimeRequest($params,$request->paymentMethod);
                // dd($request->type);
               //  dd($payements["data"]["sms_link"]);
+            //  dd($payements);
                 if($payements["statut_code"]==200)
                 {
-                    header("Location: ".$payements["data"]["sms_link"]);
-                    exit();
+
+                    if($request->paymentMethod=="wave")
+                    {
+                       // dd($payements);
+                        header("Location: ".$payements["data"]["sms_link"]);
+                        exit();
+                    }
+                    elseif($request->paymentMethod=="orange")
+                    {
+                        //dd($payements);
+                        $isMobile = $this->licenceRepository->isMobile();
+                        if(!$isMobile)
+                        {
+                            $qrcode = $payements["data"]["sms_link2"];
+                            return view("plan.orange",compact("qrcode"));
+                        }
+                        else
+                        {
+                            header("Location: ".$payements["data"]["sms_link1"]);
+                            exit();
+                        }
+                    }
+
 
                 }
                 else
