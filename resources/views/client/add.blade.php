@@ -77,8 +77,8 @@
                                         <label>Sexe</label>
                                         <select class="form-control" name="sexe" required="">
                                             <option value="">Selectionner</option>
-                                            <option value="h" {{old('sexe')=="h" ? "selected" : '' }} >Homme</option>
-                                            <option value="f" {{old('sexe')=="f" ? "selected" : '' }} >Femme</option>
+                                            <option value="homme" {{old('sexe')=="homme" ? "selected" : '' }} >Homme</option>
+                                            <option value="femme" {{old('sexe')=="femme" ? "selected" : '' }} >Femme</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6">

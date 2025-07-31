@@ -72,8 +72,8 @@
                                         <label>Sexe</label>
                                         <select class="form-control" name="sexe" required="">
                                             <option value="">Selectionner</option>
-                                            <option value="h" {{ $client->sexe=="h" ? "selected" : '' }} >Homme</option>
-                                            <option value="f" {{ $client->sexe=="f" ? "selected" : '' }} >Femme</option>
+                                            <option value="homme" {{ $client->sexe=="homme" ? "selected" : '' }} >Homme</option>
+                                            <option value="femme" {{ $client->sexe=="femme" ? "selected" : '' }} >Femme</option>
 
                                         </select>
                                     </div>
