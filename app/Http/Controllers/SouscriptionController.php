@@ -146,7 +146,8 @@ class SouscriptionController extends Controller
     public function createByClient($client_id)
     {
          $offres = $this->offreRepository->getAll();
-        return view("souscription.add-client",compact("client_id","offres"));
+         $client = $this->clientRepository->getById($client_id);
+        return view("souscription.add-client",compact("client_id","offres",'client'));
     }
 
      public function storeByClient(Request $request)

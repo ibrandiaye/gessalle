@@ -63,7 +63,7 @@ class SalleController extends Controller
         'telephone' => 'required',
         'image' => 'required',
         'essai' => 'required',
-         'email' => 'file|mimes:png,jpg,jpeg',
+         'logo' => 'file|mimes:png,jpg,jpeg',
         ], [
             'nom.required' => 'Le nom est obligatoire.',
             'adresse.required' => 'L\'adresse est obligatoire obligatoire.',
