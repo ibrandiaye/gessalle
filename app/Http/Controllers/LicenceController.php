@@ -219,7 +219,7 @@ class LicenceController extends Controller
                     $service_id = $orange_service;
                 }
                 $params = [
-                'amount' => 200 /*$plan->montant*/,
+                'amount' => $plan->montant,
                 'destination' => $request->tel,
                 'api_key' => $api_key,
                 'ipn_url' => $app_url."api/valider/paiement",
