@@ -63,7 +63,7 @@
                             @foreach ($salles as $salle)
                                 <tr>
                                     <td>{{ $salle->id }}</td>
-                                    <td> <img class="img img-rounded" height="40px" src="{{ asset('logo/'.$salle->logo) }}"></td>
+                                    <td> @if($salle->logo) <img class="img img-rounded" height="40px" src="{{ asset('logo/'.$salle->logo) }}"> @endif</td>
                                     <td>{{ $salle->nom }}</td>
                                     <td>{{ $salle->adresse}}</td>
                                     <td>{{ $salle->telephone}}</td>
