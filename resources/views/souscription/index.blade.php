@@ -81,7 +81,7 @@
                             </td>
                             <td>
                                 <a href="{{ route('getOneSouscriptionById', $souscription->id) }}" role="button" class="btn btn-info" target="_blank"><i class="fas fa-print"></i></a>
-
+                                 @if (Auth::user()->role=="admin")
                                 <a href="{{ route('souscription.edit', $souscription->id) }}" role="button" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                 <form method="POST"
                                     action="{{ route('souscription.destroy', $souscription->id) }}"
@@ -93,7 +93,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
-
+                                @endif
 
                             </td>
 

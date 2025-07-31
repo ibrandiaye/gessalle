@@ -66,6 +66,9 @@
                             <td>{{ $depense->montant}}</td>
                             <td>{{ $depense->employe->pseudo}}</td>
                             <td>
+                                @if (Auth::user()->role=="admin")
+
+
                                 <a href="{{ route('depense.edit', $depense->id) }}" role="button" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                                 <form method="POST"
                                     action="{{ route('depense.destroy', $depense->id) }}"
@@ -77,7 +80,7 @@
                                         <i class="far fa-trash-alt"></i>
                                     </button>
                                 </form>
-
+                                @endif
                             </td>
 
                         </tr>
