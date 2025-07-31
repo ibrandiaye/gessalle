@@ -82,6 +82,11 @@
                     {{ $souscription->prenom }} {{ $souscription->nom }} </strong></b></td>
                 </tr>
                 <tr>
+                    <td><b> TEL</b></td>
+                    <td class="float-right"><b><strong>
+                    {{ $souscription->tel }}  </strong></b></td>
+                </tr>
+                <tr>
                     <td><b>  Date</b></td>
                     <td class="float-right"><b> {{  Carbon\Carbon::parse( $souscription->created_at)->format('d-m-Y H:i') }}</b></td>
                 </tr>
