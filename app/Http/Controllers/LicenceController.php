@@ -235,11 +235,11 @@ class LicenceController extends Controller
                 'redirect_url' => $app_url."",
                 'redirect_error_url' => $app_url.""
             ];
-            //dd($params);
+           // dd($params);
                 $payements = $this->licenceRepository->sendAirtimeRequest($params,$request->paymentMethod);
                // dd($request->type);
               //  dd($payements["data"]["sms_link"]);
-            //  dd($payements);
+                //dd($payements);
                 if($payements["statut_code"]==200)
                 {
 
