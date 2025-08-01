@@ -174,7 +174,7 @@ class LicenceController extends Controller
         {
 
             //$plan_id,$type
-           // dd($request);
+          // dd($request);
 
            // dd($api_key);
             $user = Auth::user();
@@ -183,6 +183,7 @@ class LicenceController extends Controller
             $api_key = env("API_KEY", 'PIX_22a66ce1-58f8-4587-9e6c-06e2d37f86b9');
             $wave_service = env("WAVE", 211);
             $orange_service = env("ORANGESN", 213);
+            $yas_service = env("YAS",155);
             $bussiness_name_id = env("BUSINESS_NAME_ID", 'am-1yw9ja8y813e0');
             $service_id = "";
             $app_url = env("APP_URL", 'https://sport.syntechadvanced.sn/');
@@ -218,6 +219,11 @@ class LicenceController extends Controller
                 {
                     $service_id = $orange_service;
                 }
+                elseif($request->paymentMethod=="free")
+                {
+                    $service_id = $yas_service;
+                }
+
                 $params = [
                 'amount' => $plan->montant,
                 'destination' => $request->tel,
@@ -257,6 +263,10 @@ class LicenceController extends Controller
                             header("Location: ".$payements["data"]["sms_link1"]);
                             exit();
                         }
+                    }
+                    elseif($request->paymentMethod=="free")
+                    {
+                        return view("plan.free");
                     }
 
 
