@@ -14,6 +14,7 @@ Artisan::command('inspire', function () {
 Schedule::call(function () {
    $today = Carbon::today();
     $licences = Licence::where('statut', 'active')
+        ->where("type","abonnement")
             ->whereDate('date_fin', '<', $today)
             ->get();
     foreach ($licences as $licence) {

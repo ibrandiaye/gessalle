@@ -74,7 +74,7 @@ function sendAirtimeRequest($params,$type) {
 
     // Exécution de la requête
     $response = curl_exec($ch);
-    dd($response);
+    //dd($response);
     // Gestion des erreurs
     if (curl_errno($ch)) {
         $error_msg = curl_error($ch);
