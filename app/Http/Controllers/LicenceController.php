@@ -264,10 +264,10 @@ class LicenceController extends Controller
                             exit();
                         }
                     }
-                    elseif($request->paymentMethod=="free")
+                  /*  elseif($request->paymentMethod=="free")
                     {
                         return view("plan.free");
-                    }
+                    }*/
 
 
                 }
