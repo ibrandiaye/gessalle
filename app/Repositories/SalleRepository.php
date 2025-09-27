@@ -29,4 +29,8 @@ class SalleRepository extends RessourceRepository{
         return DB::table("salles")->where("id",$id)->update(["ct_sms"=>$nb]);
 
     }
+     public function nbrSalle()
+    {
+        return DB::table("salles")->where('etat',true)->count();
+    }
 }

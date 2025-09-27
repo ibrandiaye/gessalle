@@ -35,9 +35,10 @@ class EmployeController extends Controller
      */
     public function index()
     {
+        $title = 'Employes';
         $user = Auth::user();
         $employes = $this->employeRepository->getEmployeBySalle($user->salle_id);
-        return view('employe.index',compact('employes'));
+        return view('employe.index',compact('employes', 'title'));
     }
 
     /**

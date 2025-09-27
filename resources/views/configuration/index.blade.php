@@ -37,7 +37,7 @@
             @endif
 
         <div class="col-12">
-            <div class="card ">
+            <div>
                 <div class="card-header">
                     LISTE DES CONFIGURATIONS DE SPORT
                     <div class="float-right">

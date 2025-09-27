@@ -37,7 +37,6 @@
         </div>
     @endif
 <div class="col-12">
-    <div class="card ">
         <div class="card-header">
             LISTE DES OFFRES
             <div class="float-right">
@@ -101,7 +100,7 @@
                 </table>
 
             </div>
-    </div>
+
 </div>
 
 @endsection

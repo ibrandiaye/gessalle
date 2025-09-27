@@ -34,8 +34,9 @@ class SalleController extends Controller
      */
     public function index()
     {
+        $title = "Salle";
         $salles = $this->salleRepository->getAll();
-        return view('salle.index',compact('salles'));
+        return view('salle.index',compact('salles', 'title'));
     }
 
     /**
@@ -45,7 +46,8 @@ class SalleController extends Controller
      */
     public function create()
     {
-        return view ('salle.add');
+        $title = "Salle > Ajoute salle";
+        return view ('salle.add',compact('title'));
     }
 
     /**
@@ -102,8 +104,9 @@ class SalleController extends Controller
      */
     public function show($id)
     {
+        $title = "Ajoute";
         $salle = $this->salleRepository->getById($id);
-        return view('salle.show',compact('salle'));
+        return view('salle.show',compact('title'));
     }
 
     /**

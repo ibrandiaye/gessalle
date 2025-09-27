@@ -19,6 +19,9 @@ class ClientRepository extends RessourceRepository{
     {
         return DB::table("clients")->where('salle_id',$salle)->count();
     }
+    public function totalClient(){
+         return DB::table('clients')->get();
+    }
 
     public function getClientBySalle($salle)
     {

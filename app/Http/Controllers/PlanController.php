@@ -20,8 +20,9 @@ class PlanController extends Controller
      */
     public function index()
     {
+        $title="Plans";
         $plans = $this->planRepository->getAll();
-        return view('plan.index',compact('plans'));
+        return view('plan.index',compact('plans', 'title'));
     }
 
     /**
@@ -31,7 +32,9 @@ class PlanController extends Controller
      */
     public function create()
     {
-        return view ('plan.add');
+       
+        $title = "Plans > Creation";
+        return view ('plan.add',compact('title'));
     }
 
     /**
@@ -68,8 +71,9 @@ class PlanController extends Controller
      */
     public function show($id)
     {
+        $title = "Plan > details";
         $plan = $this->planRepository->getById($id);
-        return view('plan.show',compact('plan'));
+        return view('plan.show',compact('plan', 'title'));
     }
 
     /**
@@ -80,8 +84,10 @@ class PlanController extends Controller
      */
     public function edit($id)
     {
+        
+        $title = "Plan > modifications";
         $plan = $this->planRepository->getById($id);
-        return view('plan.edit',compact('plan'));
+        return view('plan.edit',compact('plan','title'));
     }
 
     /**
@@ -116,8 +122,9 @@ class PlanController extends Controller
     }
      public function indexClient()
     {
+        $title = "Boutique";
         $plans = $this->planRepository->getAll();
-        return view('plan.liste',compact('plans'));
+        return view('plan.liste',compact('plans','title'));
     }
 
     public function updatePlanByEtat($id,$statut)

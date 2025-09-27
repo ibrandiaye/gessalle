@@ -14,7 +14,7 @@
 
                         </ol>
                     </div>
-Gestion Salle
+                        Gestion Salle
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -22,7 +22,7 @@ Gestion Salle
 
         <form action="{{ route('user.password.update') }}" method="POST">
             @csrf
-             <div class="card ">
+             
                         <div class="card-header text-center">Bienvenue dans la plateforme de gestion des salles de sport</div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -69,7 +69,7 @@ Gestion Salle
 
 
                             </div>
-                        </div>
+           
         </form>
 
 @endsection

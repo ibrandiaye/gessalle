@@ -35,6 +35,7 @@ class LicenceController extends Controller
         $user = Auth::user();
         if($user->role=="superadmin")
         {
+            $title = "License";
             $licences = $this->licenceRepository->getAll();
 
         }
@@ -42,7 +43,7 @@ class LicenceController extends Controller
         {
             $licences = $this->licenceRepository->getLicenceBySalle($user->salle_id);
         }
-        return view('licence.index',compact('licences'));
+        return view('licence.index',compact('licences', 'title'));
     }
 
     /**
@@ -52,9 +53,10 @@ class LicenceController extends Controller
      */
     public function create()
     {
+        $title = "Ajoute License";
         $salles = $this->salleRepository->getAll();
         $plans = $this->planRepository->getAll();
-        return view('licence.add',compact("salles","plans"));
+        return view('licence.add',compact("salles","plans","title"));
     }
 
     /**
@@ -94,8 +96,9 @@ class LicenceController extends Controller
      */
     public function show($id)
     {
+        $title = "License";
         $licence = $this->licenceRepository->getById($id);
-        return view('licence.show',compact('licence'));
+        return view('licence.show',compact('licence', 'title'));
     }
 
     /**

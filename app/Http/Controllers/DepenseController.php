@@ -31,9 +31,10 @@ class DepenseController extends Controller
      */
     public function index()
     {
+        $title = "Depenses";
         $user = Auth::user();
         $depenses = $this->depenseRepository->getDepenseBySalle($user->salle_id);
-        return view('depense.index',compact('depenses'));
+        return view('depense.index',compact('depenses','title'));
     }
 
     /**
@@ -44,7 +45,7 @@ class DepenseController extends Controller
     public function create()
     {
         $employes = $this->employeRepository->getEmployeBySalle(Auth::user()->salle_id);
-        return view ('depense.add',compact("employes"));
+        return view ('depense.add',compact("title"));
     }
 
     /**

@@ -40,9 +40,10 @@ class SouscriptionController extends Controller
      */
     public function index()
     {
+        $title = "Tickets";
         $user = Auth::user();
         $souscriptions = $this->souscriptionRepository->getSouscriptionBySalle($user->salle_id);
-        return view('souscription.index',compact('souscriptions'));
+        return view('souscription.index',compact('souscriptions','title'));
     }
 
     /**

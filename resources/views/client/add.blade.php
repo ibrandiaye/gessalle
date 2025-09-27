@@ -24,7 +24,6 @@
 
         <form action="{{ route('client.store') }}" method="POST">
             @csrf
-             <div class="card">
                         <div class="card-header ">
                             <div class="text-center">
                                 FORMULAIRE D'ENREGISTREMENT D'UN CLIENT

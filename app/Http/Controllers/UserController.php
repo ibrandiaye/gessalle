@@ -29,8 +29,9 @@ class UserController extends Controller
      */
     public function index()
     {
+         $title = "Utilisateurs";
         $users = $this->userRepository->getAll();
-        return view('user.index',compact('users'));
+        return view('user.index',compact('users','title'));
     }
 
     /**
@@ -40,9 +41,9 @@ class UserController extends Controller
      */
     public function create()
     {
-
+        $title = "Ajoute Utilisateur";
         $salles = $this->salleRepository->getAll();
-        return view('user.add',compact("salles"));
+        return view('user.add',compact("salles", 'title'));
     }
 
     /**
@@ -98,10 +99,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+        $title = "Modifier Utilisateur";
         $user = $this->userRepository->getById($id);
         $salles = $this->salleRepository->getAll();
 
-        return view('user.edit',compact('user',"salles"));
+        return view('user.edit',compact('user',"salles", 'title'));
     }
 
     /**

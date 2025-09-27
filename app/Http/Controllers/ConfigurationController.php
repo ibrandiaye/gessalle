@@ -20,8 +20,9 @@ class ConfigurationController extends Controller
      */
     public function index()
     {
+        $title = "Configuration";
         $configurations = $this->configurationRepository->getAll();
-        return view('configuration.index',compact('configurations'));
+        return view('configuration.index',compact('configurations', 'title'));
     }
 
     /**
@@ -31,7 +32,8 @@ class ConfigurationController extends Controller
      */
     public function create()
     {
-        return view ('configuration.add');
+        $title = "Ajout > configuration";
+        return view ('configuration.add',compact('title'));
     }
 
     /**

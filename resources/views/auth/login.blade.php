@@ -4,118 +4,74 @@
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-        <title>MI 20205</title>
+        <title>Syntech Advanced — Connexion</title>
         <meta content="Admin Dashboard" name="description" />
         <meta content="Mannatthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
         <link rel="shortcut icon" href="assets/images/favicon.ico">
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/icons.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('css/style.css') }}" rel="stylesheet" type="text/css">
-
+        <link href="{{ asset('ncss/newcostum.css') }}" rel="stylesheet" type="text/css">
     </head>
     <style>
-
-    .background {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url("/images/bg.jpg"); /* Remplacez par le chemin de votre image */
-                background-size: cover;
-                background-position: center;
-
-                z-index: -1; /* Pour que l'image soit derrière le contenu */
-            }
-
+    
     </style>
-    <body class="background">
+    <body>
+       <main class="page">
+    <!-- Colonne gauche décorative avec fond d'écran -->
+    <section aria-hidden="true" class="visual"></section>
 
+    <!-- Colonne droite: formulaire de connexion -->
+    <section class="auth">
+      <div class="card" role="form" aria-labelledby="titre">
+        <h1 id="titre" class="title"><span class="brand">Syna Syntech Advanced</span></h1>
+        <p class="subtitle">Améliorer la satisfaction client et augmenter les revenus, un appel à la fois.</p>
 
-    <!-- Begin page -->
-    <div class="accountbgs"></div>
-    <div class="wrapper-page">
-
-        <div class="card">
-            <div class="card-body">
-
-                <div class="text-center">
-                      <a href="{{route('home')}}" class="logo logo-admin"><img src="{{ asset('images/logo.png') }} " height="150" alt="logo"></a>
-                </div>
-
-                <div class="px-3 pb-3">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            {{-- <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email ') }}</label> --}}
-
-                            <div class="col-md-12">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Votre Login" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            {{-- <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Mot de passe') }}</label> --}}
-
-                            <div class="col-md-12">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Votre Mot de passe">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                      {{--   <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div> --}}
-
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                   Se Connecter
-                                </button>
-
-
-                            </div>
-                            <div class="form-group text-center mt-4 pt-2">
-                                <div class="col-sm-12">
-                                    @if (Route::has('password.request'))
-                                        <a class="text-muted" href="{{ route('password.request') }}">
-                                           <i class="fa fa-lock mr-1"></i> Mot de passe oublier
-                                        </a>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-            </div>
+        <form action="#" method="post" action="{{ route('login') }}" novalidate>
+            @csrf
+          <div class="field">
+            <label class="label" for="email">{{ __('Email ') }}</label>
+            <input class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" name="email" type="email" autocomplete="email" placeholder="exemple@domaine.com" required autocomplete="email" />
+            @error('email')
+              <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
         </div>
-    </div>
 
+          <div class="field">
+          <label class="label" for="password">{{ __('Mot de passe') }}</label> 
+            <input class="input" id="password" name="password" type="password" autocomplete="current-password" class="form-control @error('password') is-invalid @enderror" placeholder="••••••••" required />
+            @error('password')
+             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+            @enderror
+        </div>
 
+          <div class="row">
+            <label class="check" for="remember">
+              <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/> Restez‑moi connecté
+            </label>
+            <a class="link" href="#">Nom d'utilisateur/mot de passe oublié</a>
+
+            @if (Route::has('password.request'))
+             <a class="text-muted" href="{{ route('password.request') }}"><i class="fa fa-lock mr-1"></i> Mot de passe oublier</a>
+            @endif
+          </div>
+
+          <button class="btn" type="submit">Login</button>
+
+          <div class="hr"></div>
+
+          <div class="row" style="justify-content:flex-start; gap:10px">
+            <span class="muted">Vous n'avez pas encore de compte&nbsp;?</span>
+            <a class="btn signup" href="#">Inscrivez‑vous</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
 
         <!-- jQuery  -->
         <script src="{{ asset('js/jquery.min.js') }}"></script>

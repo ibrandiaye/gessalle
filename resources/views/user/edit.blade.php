@@ -26,7 +26,13 @@
             @csrf
             @method('PATCH')
              <div class="card ">
-                        <div class="card-header text-center">FORMULAIRE DE MODIFICATION D'UN UTILISATEUR</div>
+                   
+                        <div class="card-header ">
+                            <div class="text-center">
+                            FORMULAIRE DE MODIFICATION D'UN UTILISATEUR
+                            </div>
+                        </div>
+                   
                             <div class="card-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

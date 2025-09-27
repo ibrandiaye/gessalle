@@ -26,9 +26,10 @@ class ClientController extends Controller
      */
     public function index()
     {
+        $title = "Clients";
         $user = Auth::user();
         $clients = $this->clientRepository->getClientBySalle($user->salle_id);
-        return view('client.index',compact('clients'));
+        return view('client.index',compact('clients','title'));
     }
 
     /**

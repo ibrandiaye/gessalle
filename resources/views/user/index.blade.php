@@ -3,43 +3,38 @@
 
 
 @section('content')
-<div class="row">
-    <div class="col-sm-12">
-        <div class="page-title-box">
-            <div class="btn-group float-right">
 
-                                <ol class="breadcrumb hide-phone p-0 m-0">
-                                <li class="breadcrumb-item"><a href="{{ route('home') }}" >ACCUEIL</a></li>
-                                <li class="breadcrumb-item active ">LISTE DES UTILISATEURS</li>
+            <div class="page-title-box">
+                <div class="btn-group float-right">
 
-                                </ol>
-                            </div>
-                              Gestion de salle de sport
+                    <ol class="breadcrumb hide-phone p-0 m-0">
+                        <li class="breadcrumb-item"><a href="{{ route('home') }}">ACCUEIL</a></li>
+                        <li class="breadcrumb-item active ">LISTE DES UTILISATEURS</li>
 
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
+                    </ol>
                 </div>
+                Gestion de salle de sport
 
+            </div>
+       
     @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
+    <div class="alert alert-success">
+        <p>{{ $message }}</p>
+    </div>
     @endif
     @if ($message = Session::get('error'))
-        <div class="alert alert-danger">
-            <p>{{ $message }}</p>
-        </div>
+    <div class="alert alert-danger">
+        <p>{{ $message }}</p>
+    </div>
     @endif
 
-<div class="col-12">
-    <div class="card ">
-        <div class="card-header">
-            LISTE DES UTILISATEURS
-            <div class="float-right">
-                <a href="{{ route('user.create') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+        <div>
+            <div class="card-header">
+                LISTE DES UTILISATEURS
+                <div class="float-right">
+                    <a href="{{ route('user.create') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+                </div>
             </div>
-        </div>
             <div class="card-body">
 
                 <table id="datatable-buttons" class="table table-bordered table-responsive-md table-striped text-center">
@@ -53,7 +48,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach ($users as $user)
+                        @foreach ($users as $user)
                         <tr>
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
@@ -82,7 +77,8 @@
                 </table>
 
             </div>
-    </div>
-</div>
+        </div>
 
+
+    
 @endsection

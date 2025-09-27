@@ -25,7 +25,7 @@
         <form method="POST" action="{{ route('client.update', $client->id) }}">
             @csrf
             @method('PATCH')
-             <div class="card ">
+            
                         <div class="card-header text-center">FORMULAIRE DE MODIFICATION D'UN CLIENT</div>
                             <div class="card-body">
                                 @if ($errors->any())
@@ -93,7 +93,7 @@
 
 
                             </div>
-                        </div>
+             
         </form>
 
 

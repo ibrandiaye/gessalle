@@ -22,4 +22,8 @@ class PlanRepository extends RessourceRepository{
         ->where("id",$id)
         ->update(["statut"=>$statut]);
     }
+    
+    public function  allPlan(){
+        return DB::table('plans')->where('statut',true)->count();
+    }
 }

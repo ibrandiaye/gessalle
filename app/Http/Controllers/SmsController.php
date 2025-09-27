@@ -31,9 +31,10 @@ class SmsController extends Controller
      */
     public function index()
     {
+        $title = 'Message';
         $user = Auth::user();
         $sms = $this->smsRepository->getSmsBySalle($user->salle_id);
-        return view('sms.index',compact('sms'));
+        return view('sms.index',compact('sms','title'));
     }
 
     /**
@@ -43,7 +44,8 @@ class SmsController extends Controller
      */
     public function create()
     {
-        return view ('sms.add');
+        $title = "Message > Nouveau message";
+        return view ('sms.add',compact('title'));
     }
 
     /**
@@ -94,8 +96,9 @@ class SmsController extends Controller
      */
     public function show($id)
     {
+        $title = "Message > Ajoute";
         $sms = $this->smsRepository->getById($id);
-        return view('sms.show',compact('sms'));
+        return view('sms.show',compact('sms'),compact('title'));
     }
 
     /**
@@ -106,8 +109,9 @@ class SmsController extends Controller
      */
     public function edit($id)
     {
+        $title = "Message > Ajoute";
         $sms = $this->smsRepository->getById($id);
-        return view('sms.edit',compact('sms'));
+        return view('sms.edit',compact('sms'),compact('title'));
     }
 
     /**

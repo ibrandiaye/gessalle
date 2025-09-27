@@ -1,0 +1,839 @@
+  :root{
+  --green-900:#0b5a36;
+  --green-700:#0f7b45;
+  --accent:#16a34a;
+  --muted:#617088;
+  --card-bg: rgba(255,255,255,0.98);
+  --radius-xl:24px;
+  --radius-md:14px;
+  --sidebar-width:200px;       /* largeur ouverte corrigée */
+  --sidebar-collapsed:60px;    /* largeur compacte corrigée */
+  --transition-fast: 0.32s;
+}
+
+/* Base */
+*,*::before,*::after{
+  box-sizing:border-box;
+}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;
+}
+body{background:#f3f6f8;color:#0f172a}
+.app{min-height:100vh;}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+  position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-width);
+  background:var(--green-900);color:#fff;padding:10px 10px;display:flex;flex-direction:column;overflow:auto;
+  -webkit-overflow-scrolling:touch;
+  transition: width var(--transition-fast) ease, transform var(--transition-fast) ease;
+  z-index:50;
+}
+.sidebar.collapsed{ 
+  width:var(--sidebar-collapsed); 
+}
+.brand {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 8px !important;
+  padding-top: 12px !important;
+  text-align: center !important;
+}
+.brand img{
+  width:58px;
+  height:58px;
+  background-image:url('logocustom.jpg');
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.3);
+  object-fit:cover;
+  transition:opacity var(--transition-fast);
+}
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+  line-height: 1;
+  display: inline-block;
+}
+
+/* structure du menu = colonne */
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding-top: 30px;
+  box-sizing: border-box;
+}
+
+/* liens du menu */
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  color: rgba(255,255,255,0.95);
+  text-decoration: none;
+  transition: transform .28s ease, background .22s ease, box-shadow .22s ease;
+}
+
+/* icône (zone) */
+.nav a .ico {
+  width: 28px;
+  height: 28px;
+  display: inline-block;
+  place-items: center;
+  font-size: 22px;
+  color: rgba(255,255,255,0.95);
+}
+
+/* label (texte) */
+.nav a .label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.95);
+  white-space: nowrap;
+  transition: color .22s ease;
+}
+
+/* hover : léger translation + glow */
+.nav a:hover {
+  background: rgba(0,173,181,0.12);
+  color: #00adb5;
+  transform: translateX(6px);
+  box-shadow: 2px 6px 18px rgba(0,173,181,0.10);
+}
+.nav a:hover .ico { 
+  transform: scale(1.12) rotate(3deg); 
+  color:#00adb5;
+ }
+
+/* active (sélectionné) */
+.nav a.active {
+  background: rgba(0,173,181,0.18);
+  color: #00adb5;
+  box-shadow: inset 3px 0 0 #00adb5;
+  padding: 5px;
+}
+
+/* bottom area */
+.sidebar .bottom {
+  margin-top: auto; /* pousse en bas */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 10px 14px 10px;
+  box-sizing: border-box;
+}
+
+/* small-btn (Paramètre / Déconnexion) */
+.small-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  transition: background .18s ease, color .18s ease;
+  justify-content: flex-start;
+  color: inherit;
+}
+
+/* Paramètre : discret gris */
+.small-btn.settings {
+  color: #cbd5e1;
+  background: transparent;
+  font-size: 13px;
+}
+.small-btn.settings .material-symbols-outlined { 
+  color: #9ca3af; 
+  font-size: 18px;
+ }
+
+/* Se déconnecter : rouge discret */
+.small-btn.logout {
+  color: #fecaca;
+  background: transparent;
+  font-size: 13px;
+}
+.small-btn.logout .material-symbols-outlined { color: #f87171; font-size: 18px; }
+
+/* hover sobre */
+.small-btn.settings:hover { background: rgba(255,255,255,0.04); color: #fff; }
+.small-btn.logout:hover { background: rgba(248,113,113,0.08); color: #fff; }
+
+/* comportement collapse: cacher labels, centrer icônes */
+.sidebar.collapsed .nav a .label,
+.sidebar.collapsed .small-btn .label,
+.sidebar.collapsed .brand img[alt] + div, /* safety: hide brand text if any */
+.sidebar.collapsed .brand h2 {
+  display: none !important;
+}
+.sidebar.collapsed .nav a,
+.sidebar.collapsed .small-btn {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+.sidebar.collapsed .nav a .ico,
+.sidebar.collapsed .small-btn .material-symbols-outlined {
+  margin: 0 !important;
+}
+/* overlay (mobile) */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity var(--transition-fast) ease;
+  z-index:40;
+}
+.overlay.visible{opacity:1;pointer-events:auto}
+
+/* ===== MAIN ===== */
+.main{
+  margin-left:var(--sidebar-width);
+  min-height:100vh;
+  overflow:auto;
+  position:relative;
+  transition:margin-left var(--transition-fast) ease;
+}
+.main.shift-collapsed{margin-left:var(--sidebar-collapsed)}
+
+/* Fond d'écran (utiliser votre image 'imagefond.png') */
+.main::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  filter:grayscale(.9) brightness(.55) blur(2px);
+  z-index:0;transform:scale(1.02);
+}
+.content{
+  position:relative;
+  z-index:1;
+  padding:32px 48px;
+  min-height:100%;
+  display: flex;
+  flex-direction:column;
+  gap:50px;
+ /* background-image: url("/images/fitness-room.jpg");*/
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.page-title-box{
+  background-color: #fff;
+  border-radius: 20px;
+}
+.card-body{
+  background-color: #fff;
+  border-radius: 20px;
+}
+.card-header {
+    background: 1px solid #ffffff;
+    color: #00adb5;
+}
+.float-right{
+  padding: -50px;
+}
+button .float-right_connect{
+  
+}
+
+/* ===== HEADER ===== */
+header.top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+  background:linear-gradient(180deg, #06d970, rgba(255,255,255,0));
+  padding:18px;
+  flex-wrap: nowrap;
+  border-radius:18px;
+  box-shadow:0 6px 18px rgba(11,90,54,.06);
+}
+
+header.top .title { font-size: 20px; }
+header.top .search { flex: 1; max-width: 640px; margin: 0 18px; }
+header.top .profile { white-space: nowrap; }
+
+.title{font-size:28px;font-weight:800;color:var(--green-900);letter-spacing:0.2px}
+.search{flex:1;max-width:720px;margin:0 24px;display:flex;align-items:center;gap:12px}
+.search input{width:100%;padding:12px 18px;border-radius:999px;border:1px solid rgba(15,23,42,.06);background:linear-gradient(180deg,#fff,#fbfcfe);box-shadow:0 4px 18px rgba(2,6,23,.04);outline:none;font-weight:600}
+.profile{display:flex;align-items:center;gap:12px}
+.profile img{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.18);object-fit:cover}
+.profile .meta{font-size:13px;color:#234;font-weight:700}
+.profile .sub{font-weight:600;color:var(--muted);font-size:11px}
+
+/* bouton minimal Hamburger -> X */
+.menu-btn{
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  background:transparent;
+  cursor:pointer;
+  padding:0;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* base de la barre */
+.menu-btn .hamburger{
+  position:relative;display:block;width:22px;height:2px;background:#fff;border-radius:2px;
+  transition:transform .28s cubic-bezier(.22,.9,.32,1), background .2s;
+}
+/* pseudo-barres */
+.menu-btn .hamburger::before,
+.menu-btn .hamburger::after{
+  content:"";position:absolute;left:0;width:22px;height:2px;background:#fff;border-radius:2px;
+  transition:transform .28s cubic-bezier(.22,.9,.32,1), opacity .2s;
+}
+.menu-btn .hamburger::before{ transform: translateY(-7px); }
+.menu-btn .hamburger::after{ transform: translateY(7px); }
+
+/* état ouvert : transforme en X */
+.menu-btn.open .hamburger{
+  background:transparent; /* middle disappears */
+}
+.menu-btn.open .hamburger::before{
+  transform: rotate(45deg);
+  top:0;
+}
+.menu-btn.open .hamburger::after{
+  transform: rotate(-45deg);
+  top:0;
+}
+
+/* petits retouches visuelles */
+.menu-btn:focus{ outline: 2px solid rgba(255,255,255,0.12); outline-offset:3px; }
+
+
+
+/* ===== STATS (KPI) ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card-d{
+  background:var(--card-bg);
+  border-radius:var(--radius-xl);
+  padding:18px;
+  box-shadow:0 12px 30px rgba(5,8,15,.06);
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.kpi .ico{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#ecfdf5,#dcfce7);box-shadow:0 8px 18px rgba(22,163,74,.08);font-weight:800;color:var(--green-700)}
+.kpi .value{font-weight:800;font-size:20px}
+.kpi .small{color:var(--muted);font-size:13px}
+button .btn_sommer{
+  font-size: 30px;
+  font-weight: 500;
+  padding: 120px;
+  margin: 1130px;
+  width: 350px;
+  background: #157148;
+  cursor: pointer;
+  border: none;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.cta {
+    display: flex;
+    text-decoration: none;
+    padding: 2px 2px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    color: white;
+    background: var(--accent);
+    transition: 1s;
+    box-shadow: 4px 4px 0 black;
+    transform: skewX(-15deg);
+}
+
+.cta:focus {
+   outline: none; 
+}
+
+.cta:hover {
+    color: #fff;
+    transition: 0.5s;
+    box-shadow: 5px 5px 0 #80fc7e;
+}
+
+.cta span:nth-child(2) {
+    transition: 0.5s;
+    margin-right: 0px;
+}
+
+.cta:hover  span:nth-child(2) {
+    transition: 0.5s;
+    margin-right: 15px;
+}
+.cta span:nth-child(2) {
+    width: 20px;
+    position: relative;
+     margin-left: 10px;
+    top: 12%;
+}
+
+/**************SVG****************/
+
+path.one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+}
+
+path.two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+}
+
+.cta:hover path.three {
+    animation: color_anim 1s infinite 0.2s;
+}
+
+.cta:hover path.one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+}
+
+.cta:hover path.two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+}
+
+/* SVG animations */
+
+@keyframes color_anim {
+    0% {
+        fill: white;
+    }
+    50% {
+        fill: #80fc7e;
+    }
+    100% {
+        fill: white;
+    }
+}
+  
+
+/* ===== PANELS & CHARTS ===== */
+.grid-2{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:18px;
+}
+.panel{
+  background:var(--card-bg);
+  padding:16px;
+  border-radius:var(--radius-xl);
+  box-shadow:0 12px 30px rgba(2,6,23,.06);
+}
+.panel h3{margin:0 0 8px;font-weight:800;color:#0f172a}
+.panel .meta{color:var(--muted);font-weight:600;font-size:13px}
+.chart-wrap > div { height: 10px; }
+
+.chart-wrap canvas { 
+  width:100%; 
+  height:100%; 
+  display:block; 
+}
+.tooltip-bubble{position:absolute; right:6%; top:12%; background:#0f172a;color:#fff;padding:8px 12px;border-radius:12px;font-weight:700;box-shadow:0 10px 30px rgba(2,6,23,.3);transition: transform 420ms cubic-bezier(.22,.9,.32,1), opacity 420ms ease}
+
+/* ===== TABLES ===== */
+.grid-2-bottom{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+.table-wrap { 
+  overflow-x: auto; 
+}
+th,td{padding:12px;text-align:left;border-bottom:1px solid rgba(15,23,42,.04);font-size:14px}
+th{color:var(--muted);font-weight:700}
+
+/* ===== Floating ticket button (bottom-right) ===== */
+.fab-ticket {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;        /* <-- position à droite */
+  left: auto;         /* s'assurer que left n'interfère pas */
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: #0b5a36;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.28);
+  z-index: 1200; /* au-dessus de l'overlay/sidebar */
+  transition: transform .18s ease, box-shadow .18s ease, right .2s ease;
+  text-decoration: none;
+  border: 4px solid rgba(255,255,255,0.08);
+}
+
+/* Icon inside FAB */
+.fab-ticket .material-symbols-outlined {
+  font-size: 24px;
+  line-height: 1;
+}
+
+/* Hover/focus */
+.fab-ticket:hover,
+.fab-ticket:focus {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 36px rgba(2,6,23,0.34);
+  outline: none;
+}
+
+/* Tablet adjustments (641–800px): keep it near right edge, slightly closer */
+@media (min-width: 641px) and (max-width: 800px) {
+  .fab-ticket {
+    right: 20px;
+    bottom: 24px;
+  }
+}
+
+/* Mobile: keep a comfortable margin from the right edge */
+@media (max-width: 640px) {
+  .fab-ticket {
+    right: 16px;
+    bottom: 20px;
+    width: 52px;
+    height: 52px;
+  }
+}
+
+/* If overlay / sidebar open, keep the FAB above everything */
+.overlay.visible ~ .fab-ticket,
+.sidebar.open ~ .fab-ticket,
+.fab-ticket {
+  z-index: 1300; /* ensure it's above overlay and open sidebar */
+}
+
+/* Focus ring for accessibility */
+.fab-ticket:focus {
+  box-shadow: 0 0 0 4px rgba(0,173,181,0.16), 0 12px 28px rgba(2,6,23,0.28);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1000px){
+  .sidebar{width:var(--sidebar-collapsed)}
+  .main{margin-left:var(--sidebar-collapsed)}
+  .brand h2{display:none}
+  .nav a span{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .grid-2-bottom{grid-template-columns:1fr}
+}/* Tablet: 641px - 800px - compact by default, open shows labels */
+
+      /* -------------------------
+   Fix tablette : sidebar.open visible + overlay under sidebar
+   ------------------------- */
+@media (min-width:641px) and (max-width:800px) {
+  /* sidebar compacte par défaut */
+  .sidebar {
+    width: var(--sidebar-collapsed);
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    transform: translateX(0);
+    transition: width .28s ease, box-shadow .28s ease;
+    z-index: 1000;
+  }
+
+  /* when open, expand to full width and ensure above overlay */
+  .sidebar.open {
+    width: var(--sidebar-width);
+    box-shadow: 0 25px 60px rgba(2,6,23,0.28);
+    z-index: 1100 !important;
+    transform: translateX(0); /* ensure visible */
+  }
+
+  /* overlay should be below the opened sidebar */
+  .overlay {
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .25s ease;
+  }
+  .overlay.visible {
+    z-index: 1000;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* labels hidden by default for compact, shown when open */
+  .sidebar .nav a .label,
+  .sidebar .bottom .label {
+    display: none;
+    opacity: 0;
+  }
+  .sidebar.open .nav a .label,
+  .sidebar.open .bottom .label {
+    display:inline-block;
+    opacity:1;
+    margin-left:12px;
+  }
+
+  /* ensure content shifts when open */
+  .sidebar.open ~ .content {
+    margin-left: var(--sidebar-width);
+  }
+}
+
+/* -------------------------
+   Panels : meilleur contraste + visibilité
+   (s’applique sur tous les écrans ; on renforce sur tablette)
+   ------------------------- */
+.panel {
+  background: rgba(255,255,255,0.96); /* plus opaque que l'image de fond */
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(2,6,23,0.08);
+  backdrop-filter: blur(6px); /* léger flou sur fond (si supporté) */
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+
+/* augmenter min-height pour charts sur tablette pour éviter d’être coupés */
+@media (min-width:641px) and (max-width:800px) {
+  .panel {
+   padding: 20px; 
+   border-radius:18px; 
+    }
+  .content { 
+    padding: 28px; 
+    } /* plus d'air autour sur tablette */
+}
+
+/* ensure main area is scrollable and charts are not cut by parent overflow */
+.content {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Make sure chart canvas expands to container */
+.chart-wrap canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+/* ===========================
+   MOBILE FIX — <= 640px
+   =========================== */
+@media (max-width: 640px) {
+
+  /* ---------- Sidebar (drawer) ---------- */
+  .sidebar {
+    width: var(--sidebar-width);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-110%);                        /* hidden off-screen by default */
+    transition: transform .28s cubic-bezier(.22,.9,.3,1);
+    z-index: 2800;                                       /* high to be above content */
+    will-change: transform;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-clip: padding-box;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 25px 60px rgba(2,6,23,0.32);
+    z-index: 3000;                                       /* ensure it's the topmost layer when open */
+  }
+
+  /* ---------- Overlay ---------- */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .28s ease;
+    z-index: 2600;                                       /* between content and sidebar */
+  }
+  .overlay.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ---------- Neutralize desktop offsets and center main/content ---------- */
+  /* Force parents not to push content (overrides desktop rules) */
+  .main, .page, .app {
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    z-index: 1200;
+  }
+
+  /* Center the .content and limit its width for readability */
+  .content {
+    margin-left: 0 !important;   /* ensure no leftover left margin */
+    margin-right: 0 !important;
+    margin: 0 auto !important;   /* center horizontally */
+    padding: 14px 16px !important;
+    max-width: 920px !important; /* readable max width on mobile (adjust if needed) */
+    width: 100% !important;
+    position: relative;
+    z-index: 1200;               /* must be below overlay (2600) and sidebar (3000) */
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure header/topbar doesn't push content */
+  header.top, .topbar {
+    margin-left: 0 !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    box-sizing: border-box;
+    z-index: 1400;
+  }
+
+  /* ---------- Header using GRID (menu | title | profile/actions) ---------- */
+  header.top, .topbar {
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* left | center | right */
+    align-items: center;
+    column-gap: 8px;
+    height: 56px;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Left column: menu button and optional left controls */
+  .header-left, .left { grid-column: 1; display:flex; align-items:center; gap:8px; }
+  header.top > #menuToggle, .topbar > #menuToggle { grid-column: 1; display:inline-flex; align-items:center; padding:8px; background:transparent; border:none; cursor:pointer; }
+
+  /* Center column: title is centered within middle column and will not be overlapped */
+  .header-title, header.top .title, .topbar .title, header.top h1, .topbar h1 {
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+    max-width: calc(100% - 24px); /* breathing room inside middle column */
+    pointer-events: none;
+    z-index: 1250;
+  }
+
+  /* Right column: actions and profile (kept minimal) */
+  .header-right, .right, .actions { grid-column: 3; display:flex; justify-content:flex-end; align-items:center; gap:8px; }
+
+  /* If profile needs to be left instead, move markup to .header-left; this rule keeps it in right col */
+  .profile, .avatar { display:inline-flex; align-items:center; justify-content:center; }
+  .profile img, .avatar img { width: 32px; height: 32px; border-radius: 50%; object-fit: cover; box-shadow: 0 6px 16px rgba(2,6,23,0.08); }
+
+  /* Hide any search control on mobile */
+  header.top .search, .topbar .search, header.top .search *, .topbar .search * {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* ---------- Make content non-interactive when overlay visible ---------- */
+  /* Selectors cover possible positions of overlay relative to main/content */
+  .overlay.visible ~ .main,
+  .overlay.visible ~ .content,
+  .overlay.visible + .main,
+  .overlay.visible + .content {
+    pointer-events: none;
+    user-select: none;
+  }
+
+  /* Dim content slightly when overlay active (optional) */
+  .overlay.visible ~ .main .content,
+  .overlay.visible ~ .content,
+  .overlay.visible + .main .content,
+  .overlay.visible + .content {
+    filter: brightness(0.94);
+    transition: filter .18s ease;
+  }
+
+  /* ---------- Grids / Panels / Tables / Charts ---------- */
+  .grid-2, .grid-2-bottom {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    transform: none;
+  }
+
+  .panel { padding: 14px; border-radius: 12px; }
+
+  .table-wrap {
+    padding: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .table-wrap table { width: 100%; }
+
+  /* ---------- Sidebar labels shown when open ---------- */
+  .sidebar .nav a .label,
+  .sidebar .bottom .label {
+    display: none;
+    opacity: 0;
+  }
+  .sidebar.open .nav a .label,
+  .sidebar.open .bottom .label {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    height: auto !important;
+    line-height: normal !important;
+    margin-left: 12px !important;
+    transition: opacity .18s ease !important;
+  }
+
+  /* ---------- FAB adjustments ---------- */
+  .fab-ticket {
+    right: 14px;
+    bottom: 18px;
+    width: 52px;
+    height: 52px;
+    z-index: 3100; /* above overlay if you want quick access; reduce if you prefer overlay above FAB */
+  }
+
+  /* ---------- Final safety tweaks ---------- */
+  /* Force zero left margin to avoid any desktop leftover rules */
+  .content, .main, .page, .app { margin-left: 0 !important; padding-left: 0 !important; }
+
+  /* Tiny screens: slight padding reduction */
+  @media (max-width: 360px) {
+    .header-title, header.top .title, .topbar .title { font-size: 16px; max-width: calc(100% - 12px); }
+    .content { padding-left: 12px !important; padding-right: 12px !important; max-width: 100% !important; }
+    .grid-2 { gap: 10px; }
+  }
+}
+

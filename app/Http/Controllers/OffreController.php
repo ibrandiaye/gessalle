@@ -27,9 +27,10 @@ class OffreController extends Controller
      */
     public function index()
     {
+        $title = "Offres";
         $user = Auth::user();
         $offres = $this->offreRepository->getOffreBySalle($user->salle_id);
-        return view('offre.index',compact('offres'));
+        return view('offre.index',compact('offres','title'));
     }
 
     /**
@@ -38,8 +39,9 @@ class OffreController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view ('offre.add');
+    { 
+        $title = "offre > ajoute";
+        return view ('offre.add',compact('title'));
     }
 
     /**
@@ -79,8 +81,9 @@ class OffreController extends Controller
      */
     public function show($id)
     {
+        
         $offre = $this->offreRepository->getById($id);
-        return view('offre.show',compact('offre'));
+        return view('offre.show');
     }
 
     /**
@@ -91,8 +94,9 @@ class OffreController extends Controller
      */
     public function edit($id)
     {
+        $title = "ffres";
         $offre = $this->offreRepository->getById($id);
-        return view('offre.edit',compact('offre'));
+        return view('offre.edit',compact('title'));
     }
 
     /**

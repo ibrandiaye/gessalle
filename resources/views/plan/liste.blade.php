@@ -3,33 +3,242 @@
 
 @push('style')
     <style>
+    
+    .wrapper{
+		max-width: 1090px;
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		margin: auto;
+		justify-content: space-between;
+	}
+	.wrapper .table{
+		background: #fff;
+		width: calc(33% - 20px);
+		padding: 30px;
+        border-radius: 30px;
+	}
+	@media (max-width: 1020px) {
+		.wrapper .table{
+		width: calc(50% - 20px);
+		margin-bottom: 40px;
+		}
+	}
+	@media (max-width: 698px) {
+		.wrapper .table{
+		width: 100%;
+		}
+	}
+	.table .price-section{
+		display: flex;
+		justify-content: center;
+	}
+    .table .price-section-sms{
+		display: flex;
+		justify-content: center;
+	}
+	.price-section .price-area{
+		height: 120px;
+		width: 120px;
+		border-radius: 50%;
+		padding: 2px;
+	}
+    .price-section-sms .price-area-sms{
+		height: 120px;
+		width: 120px;
+		border-radius: 50%;
+		padding: 2px;
+	}
+	 .price-area .inner-area{
+	 	height: 100%;
+	 	width: 100%;
+	 	border-radius: 50%;
+	 	border:3px solid #fff;
+	 	color: #fff;
+	 	line-height: 117px;
+	 	text-align: center;
+	 	position: relative;
+	}
+	.price-area-sms .inner-area-sms{
+	 	height: 100%;
+	 	width: 100%;
+	 	border-radius: 50%;
+	 	border:3px solid #fff;
+	 	color: #fff;
+	 	line-height: 117px;
+	 	text-align: center;
+	 	position: relative;
+	}
+	.price-area .inner-area .text{
+	 	font-size: 10px;
+	 	font-weight: 400;
+	 	position: absolute;
+	 	top: -10px;
+	 	right: 17px;
+        margin-block: 25px;
+	}
+    
+	.price-area-sms .inner-area-sms .text{
+	 	font-size: 10px;
+	 	font-weight: 400;
+	 	position: absolute;
+	 	top: -10px;
+	 	right: 17px;
+        margin-block: 25px;
+	}
+	.price-area .inner-area .price{
+	 	font-size: 25px;
+	 	font-weight: 300;
+	 	margin-left: 16px;
+	}
+	.price-area-sms .inner-area-sms .price{
+	 	font-size: 25px;
+	 	font-weight: 300;
+	 	margin-left: 16px;
+	}
+	.table .package_name{
+	 	width: 100%;
+	 	height: 2px;
+	 	margin: 35px 0;
+	 	position: relative;
+	} 
+	.table .package_name-sms{
+	 	width: 100%;
+	 	height: 2px;
+	 	margin: 35px 0;
+	 	position: relative;
+	}
+	.table .package_name::before{
+	 	position: absolute;
+	 	content: "";
+	 	left: 50%;
+	 	top: 50%;
+	 	background: #fff;
+	 	font-size: 25px;
+	 	font-weight: 500;
+	 	padding: 0 15px;
+	 	transform: translate(-50%, -50%);
+	}
+	.table .package_name-sms::before{
+	 	position: absolute;
+	 	content: "";
+	 	left: 50%;
+	 	top: 50%;
+	 	background: #fff;
+	 	font-size: 25px;
+	 	font-weight: 500;
+	 	padding: 0 15px;
+	 	transform: translate(-50%, -50%);
+	}
+	.table .features li{
+	 	margin-bottom: 15px;
+	 	list-style: none;
+	 	display: flex;
+	 	justify-content: space-between;
+	}
+	.table .features-sms li{
+	 	margin-bottom: 15px;
+	 	list-style: none;
+	 	display: flex;
+	 	justify-content: space-between;
+	}
+	.features li .list_name{
+	 	font-size: 17px;
+	 	font-weight: 400;
+	}
+    .features-sms li .list_name{
+	 	font-size: 17px;
+	 	font-weight: 400;
+	}
+	.features li .icon{
+	 	font-size: 15px
+	}
+	.features-sms li .icon{
+	 	font-size: 15px
+	}
+	.features li .icon.check{
+	 	color: #0b5a36;
+	}
+	.features-sms li .icon.check{
+	 	color: #2db94d;
+	}
+	.features li .icon.cross{
+	 	color: #0b5a36;
+	 }
+     .features-sms li .icon.cross{
+	 	color: #2db94d;
+	 }
+	 .table .btn {
+	 	display: flex;
+	 	justify-content: center;
+	 }
+	 
+	 .table .btn-sms {
+	 	display: flex;
+	 	justify-content: center;
+	 }
+	 .table .btn button{
+	 	width: 80%;
+	 	height: 50px;
+	 	color: #fff;
+	 	font-size: 15px;
+	 	font-weight: 500;
+	 	border: none;
+	 	outline: none;
+	 	border-radius: 25px;
+	 	cursor: pointer;
+	 	transition: all 0.5s ease;
+	 }
+	 
+	 .table .btn-sms button{
+	 	width: 80%;
+	 	height: 50px;
+	 	color: #fff;
+	 	font-size: 15px;
+	 	font-weight: 500;
+	 	border: none;
+	 	outline: none;
+	 	border-radius: 25px;
+	 	cursor: pointer;
+	 	transition: all 0.5s ease;
+	 }
+	 .table .btn button:hover {
+	 	border-radius: 5px;
+	 }
+	 .table ::selection{
+	 	color: #fff;
+	 }
+	 .table .btn-sms button:hover {
+	 	border-radius: 5px;
+	 }
+	 .premium ::selection,
+	 .premium .price-area,
+	 .premium .inner-area,
+	 .premium .btn button{
+	 	background: #0b5a36;
+	 }
+     .premium-sms ::selection,
+	 .premium-sms .price-area-sms,
+	 .premium-sms .inner-area-sms,
+	 .premium-sms .btn-sms button{
+	 	background: #2db94d;
+	 }
+	 .premium .btn button:hover{
+	 	color: #fff;
+	 	background: #0b5a36;
+	 }
+	 .premium-sms .btn-sms button:hover{
+	 	color: #fff;
+	 	background: #43ef8b;
+	 }
+	 .premium .package_name{
+	 	background: #0b5a36;
+	 }
+	 .premium-sms .package_name-sms{
+	 	background: #43ef8b;
+	 }
 
-    .payment-method-card {
-        border: 2px solid transparent;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        background-color: #f8f9fa;
-    }
-
-    .payment-method-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-    }
-
-    .form-check-input:checked + .payment-method-card {
-        border-color: #0d6efd;
-        background-color: #e7f1ff;
-    }
-
-    .payment-logo {
-        height: 40px;
-        width: auto;
-        object-fit: contain;
-    }
-
-    .modal-body {
-        padding: 2rem;
-    }
+    
 </style>
 @endpush
 
@@ -46,7 +255,7 @@
             </div>
         @endif
         <div class="page-title-box">
-            <div class="btn-group float-right">
+            <div class="btn-group float-right" id="title_ges">
 
                                 <ol class="breadcrumb hide-phone p-0 m-0">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}" >ACCUEIL</a></li>
@@ -73,93 +282,62 @@
     @endif
 
 <H4>ABONNEMENT</H4>
-<div class="col-12">
-    <div class="row">
-        @foreach ($plans as $plan)
-            @if ($plan->intitule!="essai" && $plan->type=="abonnement" )
-                <div class="col-lg-4 mb-4">
-                    <div class="card card-pricing shadow-sm border-0 rounded-lg overflow-hidden mb-4">
-                        <!-- Card Header with accent color -->
-                        <div class="card-header bg-success text-white text-center py-4">
-                            <h4 class="font-weight-light mb-0 text-uppercase">{{ $plan->intitule }}</h4>
-                        </div>
 
-                        <!-- Price Section -->
-                        <div class="card-body text-center px-4 py-5">
-                            <h2 class="display-4 mb-3 font-weight-bold text-dark">{{ $plan->montant }} <small class="h6 text-muted">/mois</small></h2>
-                            <p class="text-muted mb-4">ABONNEMENT</p>
-
-                            <!-- Features List (you can add plan features if available) -->
-                            <ul class="list-unstyled mb-4">
-                                <li class="py-2 border-bottom"><i class="fas fa-check text-success mr-2"></i> Accès illimité</li>
-
-                            </ul>
-
-                            <!-- Subscribe Button href="{--{ route('createBySalleAndPlan', [$plan->id,$plan->type]) }--}" -->
-                            <a data-toggle="modal" data-target="#exampleModalform{{ $plan->id }}"
-                            class="btn btn-danger btn-lg btn-block rounded-pill py-3 shadow-sm mt-3">
-                                <i class="fas fa-arrow-right mr-2"></i> Acheter maintenant
-                            </a>
-                        </div>
-
-
-                    </div>
-                </div>
-            @endif
+<div class="wrapper">
+    @foreach ($plans as $plan)
+   
+    @if ($plan->intitule != "Essai" && $plan->type=="abonnement" )
+		<div class="table premium">
+			<div class="price-section">
+				<div class="price-area">
+					<div class="inner-area">
+						<span class="text">/mois</span>
+						<span class="price">{{ $plan->montant }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="package_name">{{ $plan->intitule }}</div>
+			<div class="features">
+			  <li>
+			  	<p class="text-muted mb-4">ABONNEMENT</p>
+			  	<span class="icon check"><i class="fas fa-check"></i>Accès illimité</span>
+			  </li>
+			</div>
+			<div class="btn"><button data-toggle="modal" data-target="#exampleModalform{{ $plan->id }}">Acheter maintenant</button></div>
+		</div>
+         @endif
 
         @endforeach
-
-
-    </div>
-
-</div>
-
+	</div>
 
 <H4>PACK SMS</H4>
-<div class="col-12">
-    <div class="row">
-        @foreach ($plans as $plan)
-            @if ($plan->intitule!="essai" && $plan->type=="sms")
-               <div class="col-lg-4 mb-4">
-                    <div class="card card-pricing shadow-sm border-0 rounded-lg overflow-hidden mb-4">
-                        <!-- Card Header with different accent color (info blue) -->
-                        <div class="card-header bg-info text-white text-center py-4">
-                            <h4 class="font-weight-light mb-0 text-uppercase">{{ $plan->intitule }}</h4>
-                        </div>
 
-                        <!-- Price Section -->
-                        <div class="card-body text-center px-4 py-5">
-                            <h2 class="display-4 mb-3 font-weight-bold text-dark">{{ $plan->montant }}
-                                <small class="h6 text-muted">/forfait</small>
-                            </h2>
-                            <p class="text-info font-weight-bold mb-4">
-                                <i class="fas fa-sms mr-2"></i> PACK SMS
-                            </p>
-
-                            <!-- Features List spécifique SMS -->
-                            <ul class="list-unstyled mb-4">
-                                <li class="py-2 border-bottom"><i class="fas fa-check text-info mr-2"></i>  {{ $plan->nb_jour }} SMS </li>
-
-                            </ul>
-
-                            <!-- Subscribe Button -->
-                            <a data-toggle="modal" data-target="#exampleModalform{{ $plan->id }}"
-                            class="btn btn-primary btn-lg btn-block rounded-pill py-3 shadow-sm mt-3" style="color: white;">
-                                <i class="fas fa-mobile-alt mr-2"></i> Souscrire
-                            </a>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            @endif
+<div class="wrapper">
+    @foreach ($plans as $plan)
+       @if ($plan->intitule!="Essai" && $plan->type=="sms" )
+		<div class="table premium-sms">
+			<div class="price-section-sms">
+				<div class="price-area-sms">
+					<div class="inner-area-sms">
+						<span class="text">/forfait</span>
+						<span class="price">{{ $plan->montant }}</span>
+					</div>
+				</div>
+			</div>
+			<div class="package_name-sms">{{ $plan->intitule }}</div>
+			<div class="features-sms">
+			  <li>
+			  	<p class="text-muted mb-4">ABONNEMENT</p>
+			  	<span class="icon check"><i class="fas fa-check"></i>Accès illimité</span>
+			  </li>
+			</div>
+			<div class="btn-sms"><button data-toggle="modal" data-target="#exampleModalform{{ $plan->id }}"> Souscrire</button></div>
+		</div>
+         @endif
         @endforeach
+	</div>
 
 
-    </div>
-
-</div>
  @foreach ($plans as $plan)
 <div class="modal fade" id="exampleModalform{{ $plan->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">

@@ -8,6 +8,7 @@ use App\Repositories\DepenseRepository;
 use App\Repositories\LicenceRepository;
 use App\Repositories\OffreRepository;
 use App\Repositories\PaiementRepository;
+use App\Repositories\PlanRepository;
 use App\Repositories\SalleRepository;
 use App\Repositories\SouscriptionRepository;
 use Illuminate\Http\Request;
@@ -27,7 +28,9 @@ class HomeController extends Controller
     protected $depenseRepository;
     protected $offreRepository;
     protected $souscriptionRepository;
+    protected $planRepository;
     public function __construct(SalleRepository $salleRepository,LicenceRepository $licenceRepository,
+        PlanRepository $planRepository,
         PaiementRepository $paiementRepository,ClientRepository $clientRepository,
         DepenseRepository $depenseRepository,OffreRepository $offreRepository, SouscriptionRepository $souscriptionRepository)
     {
@@ -39,6 +42,7 @@ class HomeController extends Controller
        $this->depenseRepository = $depenseRepository;
        $this->offreRepository   = $offreRepository;
        $this->souscriptionRepository = $souscriptionRepository;
+       $this->planRepository = $planRepository;
     }
 
     /**
@@ -49,6 +53,7 @@ class HomeController extends Controller
     public function index()
     {
         $user = Auth::user();
+        $title="tableau de bord";
         if($user->role=="superadmin")
         {
         $nbSalleActive = $this->salleRepository->nbSalleByEtat("active");
@@ -57,10 +62,12 @@ class HomeController extends Controller
         $nbLicenceInactive = $this->licenceRepository->nbLicenceByEtat("expire");
         $chiffreAffaire = $this->licenceRepository->chiffreAffaire();
         $chiffreAffaireParClient = $this->licenceRepository->chiffreAffaireParClient();
+        $nbrSalle = $this->salleRepository->nbrSalle();
+        $nbrPlan = $this->planRepository->allPlan();
 
        // dd($chiffreAffaireParClient);
-        return view('home',compact("nbSalleActive","nbSalleInactive",
-            "nbLicenceActive","nbLicenceInactive","chiffreAffaire","chiffreAffaireParClient"));
+        return view('home',compact("nbSalleActive","nbSalleInactive","nbrSalle","nbrPlan",
+            "nbLicenceActive","nbLicenceInactive","chiffreAffaire","chiffreAffaireParClient",'title'));
         }
         else
         {
@@ -70,7 +77,7 @@ class HomeController extends Controller
             $nbOffre = $this->offreRepository->nbOffreBySalle($user->salle_id);
             $licence = $this->licenceRepository->getLicenceOneBySalle($user->salle_id);
             //dd($sommePaiment,$nbClient);
-            return view('home-salle',compact("sommePaiment","nbClient","depense","nbOffre","licence"));
+            return view('home-salle',compact("sommePaiment","nbClient","depense","nbOffre","licence",'title'));
         }
 
     }

@@ -37,7 +37,7 @@
         </div>
     @endif
 <div class="col-12">
-    <div class="card ">
+    <div >
         <div class="card-header">
             LISTE DES SOUSCRIPTIONS
             <div class="float-right">
