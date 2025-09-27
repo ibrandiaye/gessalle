@@ -21,10 +21,18 @@
                     <div style="display:flex;align-items:center;gap:14px">
                         <div class="profile">
                             <div style="text-align:right">
-                                <div class="meta">KOULIS FITNESS</div>
-                                <div class="sub">Administrator</div>
+                                <div class="meta"></div>
+                                <div class="sub"></div>
                             </div>
-                            <img src="profi5.png" alt="Admin avatar">
+                          
+                           @if(auth()->user()->salle_id != null)
+                                   @php
+                                          $salle = Illuminate\Support\Facades\DB::table('salles')->where('id',auth()->user()->salle_id)->first();
+                                         
+                                    @endphp
+                                     @if($salle->logo) <img class="img img-rounded" height="40px" src="{{ asset('logo/'.$salle->logo) }}"> @endif
+                        
+                           @endif
                         </div>
                     </div>
                 </header>

@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('welcome')
+
 @section('title', '| depense')
 
 @section("css")
