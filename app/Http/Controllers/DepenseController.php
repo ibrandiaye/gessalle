@@ -44,8 +44,9 @@ class DepenseController extends Controller
      */
     public function create()
     {
+        $title = "Ajoute une dépense";
         $employes = $this->employeRepository->getEmployeBySalle(Auth::user()->salle_id);
-        return view ('depense.add',compact("title"));
+        return view ('depense.add',compact("title","employes"));
     }
 
     /**

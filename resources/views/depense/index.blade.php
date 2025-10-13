@@ -41,7 +41,7 @@
         <div class="card-header">
             LISTE DES DEPENSES
             <div class="float-right">
-                <a href="{{ route('depense.create') }}" class="btn btn-primary">Ajouter un dépense</a>
+                <a href="{{ route('depense.create') }}" class="btn btn-primary">Ajouter une dépense</a>
             </div>
         </div>
             <div class="card-body">

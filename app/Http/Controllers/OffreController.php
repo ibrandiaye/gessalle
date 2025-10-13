@@ -94,9 +94,9 @@ class OffreController extends Controller
      */
     public function edit($id)
     {
-        $title = "ffres";
+        $title = "Offres";
         $offre = $this->offreRepository->getById($id);
-        return view('offre.edit',compact('title'));
+        return view('offre.edit',compact('title','offre'));
     }
 
     /**

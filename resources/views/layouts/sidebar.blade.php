@@ -1,7 +1,7 @@
 <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" aria-label="Navigation principale">
             <div class="brand">
-                <img src="{{ asset('images/logocustom.png')}}" alt="Logo 2SA">
+                <img src="{{ asset('images/logocustom.png')}}" href="{{ route('home') }}" class="active" data-key="dashboard" alt="Logo 2SA">
             </div>
 
             <nav class="nav" aria-label="Menu">
@@ -26,7 +26,7 @@
                                     </a>
                                  
                                
-                                    <a href="{{ route('licence.index') }}" >
+                                    <a href="" >
                                       <span class="material-symbols-outlined">license</span>
                                       <span class="label">Licence </span>
                                     </a>

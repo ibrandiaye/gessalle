@@ -22,7 +22,7 @@
                         <div class="profile">
                             <div style="text-align:right">
                                 <div class="meta"></div>
-                                <div class="sub"></div>
+                                <div class="sub">Administrator</div>
                             </div>
                           
                            @if(auth()->user()->salle_id != null)

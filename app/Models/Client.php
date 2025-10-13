@@ -13,4 +13,9 @@ class Client extends Model
         'tel',
         'email','sexe','salle_id','date_naiss'
     ];
+
+     protected $casts = [
+        'date_naiss' => 'datetime',
+
+    ];
 }

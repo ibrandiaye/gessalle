@@ -28,8 +28,8 @@
     <!-- Colonne droite: formulaire de connexion -->
     <section class="auth">
       <div class="card" role="form" aria-labelledby="titre">
-        <h1 id="titre" class="title"><span class="brand">Syna Syntech Advanced</span></h1>
-        <p class="subtitle">Améliorer la satisfaction client et augmenter les revenus, un appel à la fois.</p>
+        <h1 id="titre" class="title"><span class="brand">2<span class="brand-lettre">SA</span></span></h1>
+        <p class="subtitle">Nous assurons votre tranquillite, Vous assurer votre productivite ! </p>
 
         <form action="#" method="post" action="{{ route('login') }}" novalidate>
             @csrf
@@ -53,8 +53,6 @@
             <label class="check" for="remember">
               <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}/> Restez‑moi connecté
             </label>
-            <a class="link" href="#">Nom d'utilisateur/mot de passe oublié</a>
-
             @if (Route::has('password.request'))
              <a class="text-muted" href="{{ route('password.request') }}"><i class="fa fa-lock mr-1"></i> Mot de passe oublier</a>
             @endif

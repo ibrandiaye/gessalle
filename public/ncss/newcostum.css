@@ -54,17 +54,213 @@
     }
     .title{
     font-weight:800; 
-    font-size:clamp(30px,2.6vw,24px);
-    margin:0 0 8px;
+    font-size:clamp(30px,2.0vw,24px);
+    margin: 8px;
+    border: 0.15em solid var(--green-500);
+    cursor: pointer;
+    border-radius: 0.45em;
+    background: none;
+    perspective: 1em;
+    font-weight: 800;
+    letter-spacing: 1em;
+    position: relative;
+    
+    -webkit-box-shadow: inset 0px 0px 0.5em 0px var(--green-500),
+        0px 0px 0.5em 0px var(--green-500);
+    -moz-box-shadow: inset 0px 0px 0.5em 0px var(--green-500),
+        0px 0px 0.5em 0px var(--green-500);
+    box-shadow: inset 0px 0px 0.5em 0px var(--green-500),
+        0px 0px 0.5em 0px var(--green-500);
+    animation: border-flicker 2s linear infinite;
     }
+    .title::before{
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0.7;
+      filter: blur(1em);
+      transform: translateY(120%) rotateX(95deg) scale(1, 0.35);
+      background: var(--green-500);
+      pointer-events: none;
+    }
+    .title::after{
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0;
+      z-index: -1;
+      background-color: var(--green-500);
+      box-shadow: 0 0 2em 0.2em var(--green-500);
+      transition: opacity 100ms linear;
+    }
+    .title:hover{
+      color: rgba(0, 0, 0, 0.8);
+      text-shadow: none;
+      animation: none;
+    }
+    .title:hover h1 .brand{
+      animation: none;
+    }
+    .title:hover .brand-lettre{
+      animation: none;
+      text-shadow: none;
+      opacity: 1;
+    }
+    
+    .title:hover:before {
+      filter: blur(1.5em);
+      opacity: 1;
+    }
+
+    .title:hover:after {
+      opacity: 1;
+    }
+
+    @keyframes brand-flicker {
+    0% {
+      opacity: 0.1;
+    }
+    2% {
+      opacity: 0.1;
+    }
+    4% {
+      opacity: 0.5;
+    }
+    19% {
+      opacity: 0.5;
+    }
+    21% {
+      opacity: 0.1;
+    }
+    23% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0.5;
+    }
+    83% {
+      opacity: 0.4;
+    }
+
+    87% {
+      opacity: 1;
+    }
+  }
+
+@keyframes text-flicker {
+  0% {
+    opacity: 0.1;
+  }
+
+  2% {
+    opacity: 1;
+  }
+
+  8% {
+    opacity: 0.1;
+  }
+
+  9% {
+    opacity: 1;
+  }
+
+  12% {
+    opacity: 0.1;
+  }
+  20% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+
+  70% {
+    opacity: 0.7;
+  }
+  72% {
+    opacity: 0.2;
+  }
+
+  77% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes border-flicker {
+  0% {
+    opacity: 0.1;
+  }
+  2% {
+    opacity: 1;
+  }
+  4% {
+    opacity: 0.1;
+  }
+
+  8% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .title{
+    font-size: 1em;
+  }
+}
     h1 .brand{
-        align-items: center;
-        color:var(--green-500)
+        float: left;
+        margin-right: -0.8em;
+        -webkit-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+           0 0 0.45em var(--green-500);
+        -moz-text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3),
+           0 0 0.45em var(--green-500);
+        text-shadow: 0 0 0.125em hsl(0 0% 100% / 0.3), 0 0 0.45em var(--green-500);
+        animation: text-flicker 3s linear infinite;
+    }
+
+    h1 .brand-lettre{
+      opacity: 0.5;
+      animation: faulty-flicker 2s linear infinite;
     }
     .subtitle{
       color:var(--card);
       font-size:14px; 
       margin:0 0 28px;
+      display: inline-block; 
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: .15em solid #8efb7e;
+      max-width: 0;
+      animation: typing 5s steps(20, end) forwards, 
+                 blink-caret 0.45s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { max-width: 0; }
+      to { max-width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #8efb7e; }
     }
 
     .field{
@@ -145,8 +341,14 @@
     width:56px;height:56px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg,#ecfdf5,#dcfce7);
     box-shadow:0 8px 18px rgba(22,163,74,.08);font-weight:800;color:var(--green-700)
   }
-  .kpi .value{font-weight:800;font-size:20px}
-  .kpi .small{color:var(--muted);font-size:13px}
+  .kpi .value{
+    font-weight:800;
+    font-size:20px;
+  }
+  .kpi .small{
+    color:var(--muted);
+    font-size:13px;
+  }
   button .btn_button {
     font-size: 32px;
     font-weight: 500;

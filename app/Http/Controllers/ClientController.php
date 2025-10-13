@@ -39,7 +39,6 @@ class ClientController extends Controller
      */
     public function create()
     {
-
         return view ('client.add');
     }
 
@@ -57,7 +56,7 @@ class ClientController extends Controller
             'prenom' => 'required|string',
             'date_naissance' => 'date',
         ]);
-
+        $title = "Clients";
         $request->merge(["salle_id"=>Auth::user()->salle_id]);
         $client = $this->clientRepository->store($request->all());
         return redirect('client');
@@ -72,8 +71,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
+        $title = "Clients";
         $client = $this->clientRepository->getById($id);
-        return view('client.show',compact('client'));
+        return view('client.show',compact('client','title'));
     }
 
     /**
@@ -84,8 +84,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
+        $title = "Client";
         $client = $this->clientRepository->getById($id);
-        return view('client.edit',compact('client'));
+        return view('client.edit',compact('client','title'));
     }
 
     /**

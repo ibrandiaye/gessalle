@@ -17,7 +17,7 @@ class PaiementRepository extends RessourceRepository{
         ->join("clients","souscriptions.client_id","=","clients.id")
 
         ->where('clients.salle_id',$salle)
-        ->whereMonth('paiements.created_at', now()->month)
+        ->whereDay('paiements.created_at', now()->day)
         ->whereYear('paiements.created_at', now()->year)
         ->sum("paiements.montant");
     }
