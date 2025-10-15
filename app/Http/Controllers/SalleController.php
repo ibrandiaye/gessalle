@@ -88,7 +88,7 @@ class SalleController extends Controller
             {
                 $plan = $this->planRepository->store(["intitule"=>"essai","nb_jour"=>(int)$_ENV['NBR_ESSAI'],"montant"=>0,"statut"=>"active","type"=>"abonnement"]);
             }
-            $request->merge(["salle_id"=>$salle->id,"plan_id"=>$plan->id,
+            $request->merge(["salle_id"=>$salle->id,"plan_id"=>$plan->id,"date_debut"=>today(),
             "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
             "role"=>"admin","type_paiement"=>"essai","type"=>"abonnement" ]);
             $this->licenceRepository->store($request->all());
