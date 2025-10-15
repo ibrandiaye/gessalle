@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\enums\Essai;
 use App\Mail\CompteClient;
 use App\Repositories\LicenceRepository;
 use App\Repositories\PlanRepository;
@@ -79,20 +80,28 @@ class SalleController extends Controller
 
 
         $salle = $this->salleRepository->store($request->all());
-        $plan = $this->planRepository->getByIntitule("essai");
-        $request->merge(["salle_id"=>$salle->id,"plan_id"=>$plan->id,"date_debut"=>today(),
-        "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
-        "role"=>"admin","type_paiement"=>"essai","type"=>"abonnement" ]);
-        if($request->essai=="oui")
+       
+        if($request->essai == Essai::OUI->value)    
         {
+            $plan = $this->planRepository->getByIntitule("essai");
+            if(!$plan)
+            {
+                $plan = $this->planRepository->store(["intitule"=>"essai","nb_jour"=>(int)$_ENV['NBR_ESSAI'],"montant"=>0,"statut"=>"active","type"=>"abonnement"]);
+            }
+            $request->merge(["salle_id"=>$salle->id,"plan_id"=>$plan->id,
+            "date_fin"=>Carbon::parse(today())->addDays($plan->nb_jour),"montant"=>0,"password"=>Hash::make("P@sser123"),"name"=>$request->nom,
+            "role"=>"admin","type_paiement"=>"essai","type"=>"abonnement" ]);
             $this->licenceRepository->store($request->all());
+        }else{
+             $request->merge(["salle_id"=>$salle->id,"role"=>"admin","name"=>$request->nom,"password"=>Hash::make("P@sser123")]);
+        
         }
 
         $user = $this->userRepository->store($request->all());
 
         Mail::to($request->email)->send(new CompteClient($user));
         //dd("dddd");
-        return redirect('salle');
+        return redirect('salle')->with('success','Salle ajoutée avec succès');
 
     }
 

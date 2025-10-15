@@ -1,7 +1,10 @@
 <!-- Sidebar -->
         <aside class="sidebar" id="sidebar" aria-label="Navigation principale">
             <div class="brand">
-                <img src="{{ asset('images/logocustom.png')}}" href="{{ route('home') }}" class="active" data-key="dashboard" alt="Logo 2SA">
+                <a href="{{ route('home') }}">
+                        <img src="{{ asset('images/logocustom.png')}}"  class="active" data-key="dashboard" alt="Logo 2SA">
+                </a>
+                
             </div>
 
             <nav class="nav" aria-label="Menu">

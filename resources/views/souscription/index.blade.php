@@ -70,8 +70,8 @@
                              <td>{{ $souscription->tel }}</td>
                             <td>{{ $souscription->sexe}}</td>
                             <td>{{ $souscription->offre}}</td>
-                            <td>{{ Carbon\Carbon::parse( $souscription->date_debut)->format('d-m-Y')}} </td>
-                            <td>{{ Carbon\Carbon::parse( $souscription->date_fin)->format('d-m-Y')}} </td>
+                            <td>{{ Carbon\Carbon::parse( $souscription->date_debut)->format('d/m/Y')}} </td>
+                            <td>{{ Carbon\Carbon::parse( $souscription->date_fin)->format('d/m/Y')}} </td>
                             <td>
                                 @if ($souscription->date_fin >=today())
                                     <span class="badge badge-success">Valide</span>
@@ -83,6 +83,8 @@
                                 <a href="{{ route('getOneSouscriptionById', $souscription->id) }}" role="button" class="btn btn-info" target="_blank"><i class="fas fa-print"></i></a>
                                  @if (Auth::user()->role=="admin")
                                 <a href="{{ route('souscription.edit', $souscription->id) }}" role="button" class="btn btn-warning"><i class="fas fa-edit"></i></a>
+                                 @endif
+                                   @if (Auth::user()->role=="superadmin")
                                 <form method="POST"
                                     action="{{ route('souscription.destroy', $souscription->id) }}"
                                     style="display:inline;"

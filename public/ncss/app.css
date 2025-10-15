@@ -1,4 +1,5 @@
-  :root{
+
+:root{
   --green-900:#0b5a36;
   --green-700:#0f7b45;
   --accent:#16a34a;
@@ -212,10 +213,12 @@ body{background:#f3f6f8;color:#0f172a}
   inset:0;
   filter:grayscale(.9) brightness(.55) blur(2px);
   z-index:0;transform:scale(1.02);
+   pointer-events: none; 
 }
+
 .content{
   position:relative;
-  z-index:1;
+ 
   padding:32px 48px;
   min-height:100%;
   display: flex;
@@ -837,3 +840,70 @@ th{color:var(--muted);font-weight:700}
   }
 }
 
+
+
+
+/* Styles pour les méthodes de paiement dans les modals */
+.payment-option {
+    margin-bottom: 10px;
+}
+
+.payment-method-card {
+    border: 2px solid #e9ecef;
+    background: #f8f9fa;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+    text-align: center;
+}
+
+.payment-method-card:hover {
+    border-color: #007bff;
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+}
+
+.payment-method-card.active {
+    border-color: #007bff;
+    background: #e7f3ff;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.2);
+}
+
+.payment-logo {
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: contain;
+    border-radius: 8px;
+    padding: 5px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour l'option sélectionnée */
+.form-check-input:checked + .payment-method-card {
+    border-color: #007bff;
+    background: #e7f3ff;
+}
+
+/* Alignement des options de paiement */
+.d-flex.justify-content-around {
+    gap: 15px;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .payment-method-card {
+        min-width: 100px;
+        padding: 15px !important;
+    }
+    
+    .payment-logo {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .d-flex.justify-content-around {
+        gap: 10px;
+    }
+}

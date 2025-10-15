@@ -286,7 +286,7 @@
 <div class="wrapper">
     @foreach ($plans as $plan)
    
-    @if ($plan->intitule != "Essai" && $plan->type=="abonnement" )
+    @if (strtolower($plan->intitule) != strtolower("essai") && $plan->type=="abonnement" )
 		<div class="table premium">
 			<div class="price-section">
 				<div class="price-area">
@@ -314,7 +314,7 @@
 
 <div class="wrapper">
     @foreach ($plans as $plan)
-       @if ($plan->intitule!="Essai" && $plan->type=="sms" )
+       @if (strtolower($plan->intitule) != strtolower("essai") && $plan->type=="sms" )
 		<div class="table premium-sms">
 			<div class="price-section-sms">
 				<div class="price-area-sms">
@@ -340,15 +340,22 @@
 
  @foreach ($plans as $plan)
 <div class="modal fade" id="exampleModalform{{ $plan->id }}" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Achat Pack @if($plan->type=="sms") SMS : {{ $plan->nb_jour }} SMS @elseif($plan->type=="abonnement") {{ $plan->intitule }} {{ $plan->nb_jour }} jours @endif</h5>
+            <div class="modal-header bg-light">
+                <h5 class="modal-title fw-bold">
+                    Achat Pack 
+                    @if($plan->type=="sms") 
+                        SMS : {{ $plan->nb_jour }} SMS 
+                    @elseif($plan->type=="abonnement") 
+                        {{ $plan->intitule }} {{ $plan->nb_jour }} jours 
+                    @endif
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
                 <form class="paymentForm" id="paymentForm{{ $plan->id }}" method="POST" action="{{ route('createBySalleAndPlan') }}">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
@@ -356,8 +363,8 @@
 
                     <!-- Choix du service de paiement -->
                     <div class="mb-4">
-                        <h6 class="mb-3 fw-bold text-center">Choisissez votre méthode de paiement</h6>
-                        <div class="d-flex justify-content-around align-items-center flex-wrap gap-3">
+                        <h6 class="mb-3 fw-bold text-center text-primary">Choisissez votre méthode de paiement</h6>
+                        <div class="d-flex justify-content-center align-items-center flex-wrap gap-3">
 
                             <!-- Option Orange Money -->
                             <div class="form-check payment-option">
@@ -365,27 +372,29 @@
                                 <label class="form-check-label payment-method-card p-3 rounded-3 shadow-sm" for="orangePayment{{ $plan->id }}">
                                     <div class="d-flex flex-column align-items-center">
                                         <img src="{{ asset('images/orange_ci.png') }}" alt="Orange Money" class="payment-logo mb-2">
-                                        <span class="fw-medium">Orange Money</span>
+                                        <span class="fw-medium small">Orange Money</span>
                                     </div>
                                 </label>
                             </div>
-                            <!-- Option Wave wavePayment-->
+
+                            <!-- Option Wave -->
                             <div class="form-check payment-option">
                                 <input class="form-check-input d-none" type="radio" name="paymentMethod" id="wavePayment{{ $plan->id }}" value="wave" checked>
                                 <label class="form-check-label payment-method-card p-3 rounded-3 shadow-sm" for="wavePayment{{ $plan->id }}">
                                     <div class="d-flex flex-column align-items-center">
                                         <img src="{{ asset('images/wave.png') }}" alt="Wave" class="payment-logo mb-2">
-                                        <span class="fw-medium">Wave SEN</span>
+                                        <span class="fw-medium small">Wave SEN</span>
                                     </div>
                                 </label>
                             </div>
+
                             <!-- Option Free Money -->
                             <div class="form-check payment-option">
                                 <input class="form-check-input d-none" type="radio" name="paymentMethod" id="freePayment{{ $plan->id }}" value="free">
                                 <label class="form-check-label payment-method-card p-3 rounded-3 shadow-sm" for="freePayment{{ $plan->id }}">
                                     <div class="d-flex flex-column align-items-center">
                                         <img src="{{ asset('images/free.png') }}" alt="Free Money" class="payment-logo mb-2">
-                                        <span class="fw-medium">Free Money</span>
+                                        <span class="fw-medium small">Free Money</span>
                                     </div>
                                 </label>
                             </div>
@@ -396,8 +405,8 @@
                     <div class="mb-3">
                         <label for="phoneNumber{{ $plan->id }}" class="form-label fw-medium">Numéro de téléphone</label>
                         <div class="input-group">
-                            <span class="input-group-text"><i class="bi bi-phone"></i></span>
-                            <input type="tel" name="tel" class="form-control py-2" id="phoneNumber{{ $plan->id }}" placeholder="77 123 45 67" required>
+                            <span class="input-group-text bg-light"><i class="bi bi-phone"></i></span>
+                            <input type="tel" name="tel" class="form-control py-2 border-light" id="phoneNumber{{ $plan->id }}" placeholder="77 123 45 67" required>
                         </div>
                         <small class="text-muted">Entrez le numéro associé à votre méthode de paiement</small>
                     </div>
@@ -410,7 +419,8 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer bg-light">
+                <small class="text-muted text-center w-100">Paiement sécurisé</small>
             </div>
         </div>
     </div>

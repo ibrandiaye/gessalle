@@ -85,7 +85,7 @@ class SouscriptionController extends Controller
         $request->merge(["souscription_id"=>$souscription->id,'date_paiement'=>$request->date_debut,
         "reference"=>$client->id."-".$request->date_debut,"montant"=>$offre->prix]);
         $this->paiementRepository->store($request->all());
-        return redirect('souscription');
+        return redirect('souscription')->with('success', 'Ticket ajouter avec succès.');
 
     }
 
@@ -112,7 +112,8 @@ class SouscriptionController extends Controller
         $souscription = $this->souscriptionRepository->getById($id);
          $offres = $this->offreRepository->getAll();
         $clients = $this->clientRepository->getAll();
-        return view('souscription.edit',compact('souscription','clients','offres'));
+        $client = $this->clientRepository->getById($souscription->client_id);
+        return view('souscription.edit',compact('souscription','clients','offres','client'));
     }
 
     /**
@@ -129,7 +130,7 @@ class SouscriptionController extends Controller
 
         $request->merge(["salle_id"=>Auth::user()->id,'date_fin'=>$date_fin]);
         $this->souscriptionRepository->update($id, $request->all());
-         return redirect('souscription');
+         return redirect('souscription')->with('success', 'Ticket modifier avec succès.');
     }
 
     /**

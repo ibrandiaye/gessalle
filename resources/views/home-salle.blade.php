@@ -26,9 +26,9 @@
             @endif
             @if($licence)
                  @if ($licence->date_fin >= today())
-               <marquee><p> Votre Licence expire le {{  Carbon\Carbon::parse( $licence->date_fin)->format('d-m-Y') }} </p></marquee>
+               <marquee><p> Votre Licence expire le {{  Carbon\Carbon::parse( $licence->date_fin)->format('d/m/Y') }} </p></marquee>
                 @else
-                    <marquee><p> Votre Licence a expire depuis le {{ Carbon\Carbon::parse( $licence->date_fin)->format('d-m-Y')}} </p></marquee>
+                    <marquee><p> Votre Licence a expire depuis le {{ Carbon\Carbon::parse( $licence->date_fin)->format('d/m/Y')}} </p></marquee>
                 @endif
             @endif
 

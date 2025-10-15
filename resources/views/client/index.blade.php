@@ -71,7 +71,7 @@
                             <td>{{ $client->email}}</td>
                              <td>{{ $client->tel }}</td>
                             <td>{{ $client->sexe}}</td>
-                            <td>{{ $client->date_naiss}}</td>
+                            <td>{{ Carbon\Carbon::parse( $client->date_naiss)->format('d/m/Y')}}</td>
                             <td>
                                 <a href="{{ route('getSouscriptionByClient', $client->id) }}" role="button" class="btn btn-primary"><i class="fas fa-eye" title="Vois Souscriptions"></i></a>
                                 <a href="{{ route('createByClient', $client->id) }}" role="button" class="btn btn-info"><i class="fas fa-database" title="souscrire"></i></a>

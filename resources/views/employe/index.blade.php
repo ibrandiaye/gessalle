@@ -75,10 +75,10 @@
                                 <i class="far fa-trash-alt"></i>
                             </button>
                         </form>
-                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalform2{{$employe->user->id}}">
+                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModalform3{{$employe->user->id}}">
                             <i class="mdi mdi-account-key" title="Modifier mot de passe"></i>
                         </button>
-                        <div class="modal fade" id="exampleModalform2{{$employe->user->id}}" tabindex="-1" role="dialog">
+                        <div class="modal fade" id="exampleModalform3{{$employe->user->id}}" tabindex="-1" role="dialog">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">

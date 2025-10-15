@@ -90,7 +90,7 @@ class EmployeController extends Controller
         $employe = $this->employeRepository->store($request->all());
                 Mail::to($request->email)->send(new EmployeMail($user,$request->password));
 
-        return redirect('employe');
+        return redirect('employe')->with('success', 'Employe ajouter avec succès.');
 
     }
 
@@ -142,7 +142,7 @@ class EmployeController extends Controller
         }
 
         $this->employeRepository->update($id, $request->all());
-         return redirect('employe');
+         return redirect('employe')->with('success', 'Employe modifier avec succès.');
     }
 
     /**

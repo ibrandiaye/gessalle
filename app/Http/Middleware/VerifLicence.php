@@ -24,8 +24,13 @@ class VerifLicence
         }
         
         $salle = $user->salle;
-        
-        if (!$salle || !$salle->licences()->where('statut', 'active')->where("type","abonnement")->exists()) {
+       
+        if (!$salle || 
+            !$salle->licences()->where('statut', 'active')
+                    ->where('date_fin', '>', now())
+                    ->where('type', 'abonnement')
+                    ->exists())
+        {
             return redirect()->back()->withErrors(['licence' => "Vous ne disposez pas d'une licence active pour effectuer cette action. "]);
         }
 

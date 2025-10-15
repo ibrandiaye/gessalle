@@ -46,40 +46,40 @@
                                           <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Prenom </label>
-                                            <input type="text" name="prenom"  value="{{ $souscription->prenom }}" class="form-control"required>
+                                            <input type="text" name="prenom"  value="{{ $client->prenom }}" class="form-control"required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Nom </label>
-                                            <input type="text" name="nom"  value="{{ $souscription->nom }}" class="form-control"required>
+                                            <input type="text" name="nom"  value="{{ $client->nom }}" class="form-control"required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>email </label>
-                                            <input type="email" name="email"  value="{{ $souscription->email }}" class="form-control">
+                                            <input type="email" name="email"  value="{{ $client->email }}" class="form-control">
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Tel </label>
-                                            <input type="text" name="tel"  value="{{ $souscription->tel }}" class="form-control" >
+                                            <input type="text" name="tel"  value="{{ $client->tel }}" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <label>Sexe</label>
                                         <select class="form-control" name="sexe" required="">
                                             <option value="">Selectionner</option>
-                                            <option value="homme" {{$souscription->sexe=="homme" ? "selected" : '' }} >Homme</option>
-                                            <option value="femme" {{$souscription->sexe=="femme" ? "selected" : '' }} >Femme</option>
+                                            <option value="homme" {{$client->sexe=="homme" ? "selected" : '' }} >Homme</option>
+                                            <option value="femme" {{$client->sexe=="femme" ? "selected" : '' }} >Femme</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Date de Naissance </label>
-                                            <input type="date" name="date_naiss"  value="{{ $souscription->date_naiss }}" class="form-control" >
+                                            <input type="date" name="date_naiss"  value="{{ $client->date_naiss }}" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

@@ -70,7 +70,7 @@
                                                 <div class="col-lg-6">
                                                     <div class="form-group">
                                                         <label>Tel </label>
-                                                        <input type="text" name="tel"  value="{{ old('tel') }}" class="form-control" >
+                                                        <input type="text" name="tel"  value="{{ old('tel') }}" class="form-control" placeholder="Numéro de téléphone" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">
@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                            <button type="submint" class="btn btn-primary">Valider</button>
+                                            <button type="submit" class="btn btn-primary">Valider</button>
                                         </div>
                                         </form>
                                     </div>
@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
-                                                <button type="button" class="btn btn-warning">Modifier mot de passe</button>
+                                                <button type="submit" class="btn btn-warning">Modifier mot de passe</button>
                                             </div>
                                         </form>
                                     </div>
