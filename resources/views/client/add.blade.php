@@ -50,7 +50,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             <label>Prenom </label>
-                                            <input type="text" name="prenom"  value="{{ old('prenom') }}" class="form-control"required>
+                                            <input type="text" name="prenom"  value="{{ old('prenom') }} " class="form-control"required>
                                         </div>
                                     </div>
                                     <div class="col-lg-6">

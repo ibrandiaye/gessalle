@@ -179,13 +179,26 @@ class SouscriptionController extends Controller
         //dd($client);
         return view("souscription.show",compact("souscriptions","client"));
     }
-    public function getOneSouscriptionById($id)
+   public function getOneSouscriptionById($id)
     {
         $souscription = $this->souscriptionRepository->getOneSouscriptionById($id);
+
+        // 🔹 Vérifie si la souscription existe
+        if (!$souscription) {
+            return redirect()
+                ->back()
+                ->with('error', 'Souscription introuvable.');
+        }
+
         $salle = $this->salleRepository->getSalleById($souscription->salle_id);
-        $qrcode = QrCode::size(100)->generate(env('APP_URL', 'http://127.0.0.1:8000/')."impression/souscription/".$id);
-        return view("souscription.impression",compact("souscription","salle","qrcode"));
+
+        // 🔹 Génère le QR code avec l’URL complète et propre
+        $url = url("impression/souscription/{$id}");
+        $qrcode = QrCode::size(100)->generate($url);
+
+        return view('souscription.impression', compact('souscription', 'salle', 'qrcode'));
     }
+
 
     public function ticketRapide()
     {

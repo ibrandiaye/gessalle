@@ -33,7 +33,22 @@
         <div id="sidebarOverlay" class="overlay" aria-hidden="true"></div>
         <main class="main" id="main">
             <div class="content">
-                @include('layouts.navbar')
+                 @include('layouts.navbar')
+                
+                    @if (session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fermer"></button>
+                        </div>
+                    @endif
+                    
+             
                 @yield('content')
                 @if($user->role!="superadmin")
                    <!-- <button class="float-right_connect"  data-toggle="modal" data-target="#exampleModalform2Ticket">

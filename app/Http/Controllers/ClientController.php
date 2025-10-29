@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Middleware\VerifLicence;
+use App\Models\Client;
 use App\Repositories\ClientRepository;
 use App\Repositories\SalleRepository;
 use Illuminate\Http\Request;
@@ -51,15 +52,25 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-
             'nom' => 'required|string',
             'prenom' => 'required|string',
             'date_naissance' => 'date',
         ]);
-        $title = "Clients";
+      
+        $client = Client::where('email', $request->email)->first();
+        
+       if ($client) {
+            $client = $request->all();
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Un client avec cet email existe déjà.');
+        }
+       
+
         $request->merge(["salle_id"=>Auth::user()->salle_id]);
         $client = $this->clientRepository->store($request->all());
-        return redirect('client');
+        return redirect('client')->with('success','Client ajouté avec succès');
 
     }
 

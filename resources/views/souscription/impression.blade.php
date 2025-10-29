@@ -76,7 +76,7 @@
 
              <table style="width: 100%;border: none;">
                 <tr>
-                    <td><b>N° Fature </b></td>
+                    <td><b>N° Facture </b></td>
                     <td class="float-right"><b>{{ $souscription->id }}</b></td>
                 </tr>
                 <tr>
@@ -91,10 +91,10 @@
                 </tr>
                 <tr>
                     <td><b>  Date</b></td>
-                    <td class="float-right"><b> {{  Carbon\Carbon::parse( $souscription->created_at)->format('d-m-Y H:i') }}</b></td>
+                    <td class="float-right"><b> {{  Carbon\Carbon::parse( $souscription->created_at)->format('d/m/Y H:i') }}</b></td>
                 </tr>
                 <tr>
-                    <td><b>  INfOLINE</b></td>
+                    <td><b>  INFOLINE</b></td>
                     <td class="float-right"><b> {{ $salle->adresse }}</b></td>
                 </tr>
 
@@ -105,8 +105,8 @@
             <!-- /.row -->
             <center> ------------------------------</center>
             <strong>Montant : {{$souscription->prix}} CFA</strong><br>
-            <strong>Debut : {{Carbon\Carbon::parse( $souscription->date_debut)->format('d-m-Y') }}</strong><br>
-            <strong>Fin : {{Carbon\Carbon::parse( $souscription->date_fin)->format('d-m-Y') }}</strong><br>
+            <strong>Debut : {{Carbon\Carbon::parse( $souscription->date_debut)->format('d/m/Y') }}</strong><br>
+            <strong>Fin : {{Carbon\Carbon::parse( $souscription->date_fin)->format('d/m/Y') }}</strong><br>
             <center> ------------------------------</center>
              <center>{{ $qrcode }}</center>
 

@@ -52,7 +52,7 @@
                 <table id="datatable-buttons" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>#</th>
+                          
                             <th>PRENOM </th>
                             <th>NOM </th>
                             <th>EMAIL</th>
@@ -65,7 +65,7 @@
                     <tbody>
                     @foreach ($clients as $client)
                         <tr>
-                            <td>{{ $client->id }}</td>
+                           
                             <td>{{ $client->prenom }}</td>
                             <td>{{ $client->nom}}</td>
                             <td>{{ $client->email}}</td>

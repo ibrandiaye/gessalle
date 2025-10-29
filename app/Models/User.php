@@ -46,6 +46,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function sallName()
+    {
+        return $this->salle ? $this->salle->nom : 'N/A';
+    }
 
     public function salle()
     {

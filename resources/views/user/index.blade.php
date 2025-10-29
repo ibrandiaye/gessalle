@@ -40,8 +40,9 @@
                 <table id="datatable-buttons" class="table table-bordered table-responsive-md table-striped text-center">
                     <thead>
                         <tr>
-                            <th>#</th>
+                         
                             <th>NOM </th>
+                            <th>SALLE </th>
                             <th>EMAIL</th>
                             <th>ROLE</th>
                             <th>Actions</th>
@@ -49,9 +50,11 @@
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
+                        
                         <tr>
-                            <td>{{ $user->id }}</td>
+                        
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->sallName() }}</td>
                             <td>{{ $user->email}}</td>
                             <td>{{ $user->role}}</td>
                             <td>

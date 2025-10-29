@@ -8,4 +8,4 @@
 <p> Mot de passe temporaire : P@sser123</p>
 <p> Salle de sport : {{ $data->name }}</p>
 
-<p> Lien d’accès à la plateforme : http://127.0.0.1:8000/</p>
+<p> Lien d’accès à la plateforme : {{ config('app.url') }}</p>
