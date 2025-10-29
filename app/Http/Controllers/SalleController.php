@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\enums\Essai;
 use App\Mail\CompteClient;
+use App\Models\Salle;
 use App\Repositories\LicenceRepository;
 use App\Repositories\PlanRepository;
 use App\Repositories\SalleRepository;
@@ -73,6 +74,16 @@ class SalleController extends Controller
             'telephone.required' => 'Le téléphone est obligatoire.',
 
         ]);
+
+          $salle = Salle::where('email', $request->email)->first();
+        
+       if ($salle) {
+          
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Une Salle avec cet email existe déjà.');
+        }
 
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('logo'), $imageName);

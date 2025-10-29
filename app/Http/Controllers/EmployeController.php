@@ -77,7 +77,15 @@ class EmployeController extends Controller
             'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
             'password.regex' => 'Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial.',
         ]);
-
+         $user = User::where('email', $request->email)->first();
+        
+        if ($user) {
+          
+            return redirect()
+                ->back()
+                ->withInput()
+                ->with('error', 'Un employer avec cet email existe déjà.');
+        }
         //$users = $this->userRepository->store($request->all());
         $user = $user_employe = User::create([
             'name' => $request['name'],
