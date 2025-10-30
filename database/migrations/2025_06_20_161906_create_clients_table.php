@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("prenom");
             $table->string("tel")->nullable();
             $table->string("email")->nullable();
-            $table->enum("sexe",['homme','femme']);
+            $table->enum("sexe",['h','f']);
             $table->date('date_naiss');
             $table->unsignedBigInteger("salle_id");
             $table->foreign("salle_id")

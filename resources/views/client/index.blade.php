@@ -70,7 +70,9 @@
                             <td>{{ $client->nom}}</td>
                             <td>{{ $client->email}}</td>
                              <td>{{ $client->tel }}</td>
-                            <td>{{ $client->sexe}}</td>
+                           <td>
+                             {{ $client->sexe === 'h' ? 'Homme' : ($client->sexe === 'f' ? 'Femme' : 'Non spécifié') }}
+                          </td>
                             <td>{{ Carbon\Carbon::parse( $client->date_naiss)->format('d/m/Y')}}</td>
                             <td>
                                 <a href="{{ route('getSouscriptionByClient', $client->id) }}" role="button" class="btn btn-primary"><i class="fas fa-eye" title="Vois Souscriptions"></i></a>
