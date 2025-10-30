@@ -25,7 +25,7 @@ class SouscriptionController extends Controller
     public function __construct(SouscriptionRepository $souscriptionRepository,OffreRepository $offreRepository,
     ClientRepository $clientRepository,PaiementRepository $paiementRepository,SalleRepository $salleRepository)
     {
-        $this->middleware([VerifLicence::class])->except(['index',"show"]);
+        $this->middleware([VerifLicence::class])->except(['index',"show","getOneSouscriptionById"]);
 
         $this->souscriptionRepository = $souscriptionRepository;
         $this->offreRepository = $offreRepository;
