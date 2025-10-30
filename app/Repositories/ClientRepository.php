@@ -25,7 +25,7 @@ class ClientRepository extends RessourceRepository{
 
     public function getClientBySalle($salle)
     {
-        return Client::where("salle_id",$salle)->get();
+        return Client::where("salle_id",$salle)->where('nom','!=','anonyme')->get();
     }
     public function getClientBySalleAndTel($salle,$tel)
     {
