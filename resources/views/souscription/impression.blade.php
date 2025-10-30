@@ -138,7 +138,7 @@
 <script>
     window.addEventListener('load', () => {
         // Supprime la ligne suivante si tu veux éviter l’impression automatique
-        // window.print();
+        window.print();
     });
 </script>
 
