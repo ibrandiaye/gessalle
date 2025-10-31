@@ -64,6 +64,9 @@
                     </thead>
                     <tbody>
                     @foreach ($souscriptions as $souscription)
+                        @php
+                            dd($souscription);
+                        @endphp
                         <tr>
 
                             <td>{{ $souscription->prenom}} {{ $souscription->nom}}</td>
