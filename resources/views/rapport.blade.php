@@ -116,6 +116,7 @@
                             <th>SEXE</th>
                             <th>TYPE</th>
                              <th>MONTANT</th>
+                             <th>TYPE PAIEMENT</th>
                             <th>DEBUT </th>
                             <th>FIN </th>
                              <th>ETAT </th>
@@ -131,6 +132,7 @@
                             <td>{{ $souscription->sexe}}</td>
                             <td>{{ $souscription->offre}}</td>
                             <td>{{ $souscription->montant}}</td>
+                            <td>{{ $souscription->type_paiement }}</td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_debut)->format('d-m-Y')}} </td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_fin)->format('d-m-Y')}} </td>
                             <td>
