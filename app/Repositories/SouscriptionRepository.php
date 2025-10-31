@@ -51,9 +51,9 @@ class SouscriptionRepository extends RessourceRepository{
         return DB::table("souscriptions")
        ->join("clients","souscriptions.client_id","=","clients.id")
         ->join("offres","souscriptions.offre_id","=","offres.id")
-        ->join("paiments","paiments.souscription_id","=","souscriptions.id")
+        ->join("paiements","paiements.souscription_id","=","souscriptions.id")
         ->select("souscriptions.*","clients.nom","clients.prenom","clients.email",
-        "offres.nom as offre","clients.tel","clients.sexe","paiments.montant as montant", "paiments.type_paiement as type_paiement")
+        "offres.nom as offre","clients.tel","clients.sexe","paiements.montant as montant", "paiements.type_paiement as type_paiement")
         ->where("clients.salle_id",$salle)
         ->whereBetween("souscriptions.created_at",[$start,$end])
         ->orderBy("souscriptions.id","desc")
