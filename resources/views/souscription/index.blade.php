@@ -64,9 +64,7 @@
                     </thead>
                     <tbody>
                     @foreach ($souscriptions as $souscription)
-                        @php
-                            dd($souscription);
-                        @endphp
+                        
                         <tr>
 
                             <td>{{ $souscription->prenom}} {{ $souscription->nom}}</td>
@@ -74,7 +72,7 @@
                              <td>{{ $souscription->tel }}</td>
                             <td>{{ $souscription->sexe}}</td>
                             <td>{{ $souscription->offre}}</td>
-                            <td>{{ $souscription->offre()->prix}}</td>
+                            <td>{{ $souscription->montant}}</td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_debut)->format('d/m/Y')}} </td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_fin)->format('d/m/Y')}} </td>
                             <td>
