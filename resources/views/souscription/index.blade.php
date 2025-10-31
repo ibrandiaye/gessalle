@@ -55,6 +55,7 @@
                             <th>TEL</th>
                             <th>SEXE</th>
                             <th>TYPE</th>
+                            <th>MONTANT</th>
                             <th>DEBUT </th>
                             <th>FIN </th>
                              <th>Etat </th>
@@ -70,6 +71,7 @@
                              <td>{{ $souscription->tel }}</td>
                             <td>{{ $souscription->sexe}}</td>
                             <td>{{ $souscription->offre}}</td>
+                            <td>{{ $souscription->offre()->prix}}</td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_debut)->format('d/m/Y')}} </td>
                             <td>{{ Carbon\Carbon::parse( $souscription->date_fin)->format('d/m/Y')}} </td>
                             <td>
