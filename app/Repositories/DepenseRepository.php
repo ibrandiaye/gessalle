@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Depense;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class DepenseRepository extends RessourceRepository{
@@ -25,12 +26,16 @@ class DepenseRepository extends RessourceRepository{
         ->where("salle_id",$salle)
         ->get();
     }
-public function getDepenseBySalleAndDate($salle,$date_debut,$date_fin)
+    public function getDepenseBySalleAndDate($salle, $date_debut, $date_fin)
     {
-        return Depense::with(["employe"])
-        ->where("salle_id",$salle)
-        ->whereBetween("created_at",[$date_debut,$date_fin])
-        ->get();
+        // S'assurer que les dates sont au bon format
+        $start = Carbon::parse($date_debut)->startOfDay();
+        $end = Carbon::parse($date_fin)->endOfDay();
+
+        return Depense::with(['employe'])
+            ->where('salle_id', $salle)
+            ->whereBetween('created_at', [$start, $end])
+            ->get();
     }
 
 }
