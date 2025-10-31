@@ -7,80 +7,98 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Source Sans Pro', sans-serif;
+        background-color: #f8f9fa;
+        font-size: 18px;
+        padding: 20px;
+        margin: 0;
+    }
 
-    <style>
-        body {
-            font-family: 'Source Sans Pro', sans-serif;
-            background-color: #f8f9fa;
-            font-size: 18px;
-            padding: 20px;
-        }
+    .ticket-wrapper {
+        width: 80mm; /* ✅ largeur exacte du rouleau */
+        min-height: 297mm; /* ✅ longueur maximale A4 */
+        margin: 0 auto;
+        background: #fff;
+        border-radius: 10px;
+        padding: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        box-sizing: border-box;
+    }
 
-        .ticket-wrapper {
-            width: 110mm;
-            margin: 0 auto;
-            background: #fff;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
+    .ticket-header {
+        text-align: center;
+        border-bottom: 2px dashed #999;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
 
-        .ticket-header {
-            text-align: center;
-            border-bottom: 2px dashed #999;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
+    .ticket-header img {
+        height: 50px;
+        margin-bottom: 10px;
+    }
 
-        .ticket-header img {
-            height: 60px;
-            margin-bottom: 10px;
-        }
+    .ticket-title {
+        font-weight: 700;
+        font-size: 20px;
+        margin: 0;
+    }
 
-        .ticket-title {
-            font-weight: 700;
-            font-size: 22px;
+    .ticket-info table {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .ticket-info td {
+        padding: 2px 0;
+    }
+
+    .ticket-summary {
+        border-top: 2px dashed #999;
+        border-bottom: 2px dashed #999;
+        padding: 8px 0;
+        margin: 12px 0;
+        text-align: center;
+        font-weight: 600;
+    }
+
+    .qrcode {
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .btn-back {
+        display: inline-block;
+        margin-bottom: 20px;
+    }
+
+    @media print {
+        @page {
+            size: 80mm 297mm; /* ✅ format d’impression exact */
             margin: 0;
         }
 
-        .ticket-info table {
-            width: 100%;
-            font-size: 17px;
+        body {
+            background: #fff;
+            padding: 0;
+            margin: 0;
         }
 
-        .ticket-info td {
-            padding: 3px 0;
-        }
-
-        .ticket-summary {
-            border-top: 2px dashed #999;
-            border-bottom: 2px dashed #999;
-            padding: 10px 0;
-            margin: 15px 0;
-            text-align: center;
-            font-weight: 600;
-        }
-
-        .qrcode {
-            text-align: center;
-            margin-top: 15px;
+        .ticket-wrapper {
+            box-shadow: none;
+            border-radius: 0;
+            width: 80mm;
+            min-height: 297mm;
+            padding: 5mm;
         }
 
         .btn-back {
-            display: inline-block;
-            margin-bottom: 20px;
+            display: none;
         }
+    }
+</style>
 
-        @media print {
-            body {
-                background: #fff;
-                padding: 0;
-            }
-            .btn-back {
-                display: none;
-            }
-        }
-    </style>
 </head>
 <body>
 
