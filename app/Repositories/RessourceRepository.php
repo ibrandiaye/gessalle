@@ -17,7 +17,7 @@ class RessourceRepository {
     }
 
       public  function getAllBySalle($salle){
-        return DB::table("offres")->where('salle_id',$salle)->count();
+        return DB::table("offres")->where('salle_id',$salle)->get();
     }
 
     public function store(Array $inputs)
