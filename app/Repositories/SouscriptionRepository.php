@@ -2,6 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Souscription;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class SouscriptionRepository extends RessourceRepository{
@@ -45,13 +46,15 @@ class SouscriptionRepository extends RessourceRepository{
     }
     public function getSouscriptionBySalleAnddate($salle,$debut,$fin)
     {
+         $start = Carbon::parse($debut)->startOfDay();
+        $end = Carbon::parse($fin)->endOfDay();
         return DB::table("souscriptions")
        ->join("clients","souscriptions.client_id","=","clients.id")
         ->join("offres","souscriptions.offre_id","=","offres.id")
         ->select("souscriptions.*","clients.nom","clients.prenom","clients.email",
         "offres.nom as offre","clients.tel","clients.sexe","offres.prix")
         ->where("clients.salle_id",$salle)
-        ->whereBetween("souscriptions.created_at",[$debut,$fin])
+        ->whereBetween("souscriptions.created_at",[$start,$end])
         ->orderBy("souscriptions.id","desc")
         ->get();
     }
