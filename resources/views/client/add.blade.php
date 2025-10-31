@@ -100,7 +100,21 @@
             </form>
 
 @endsection
+@push('scripts')
+    <script>
+document.querySelector('form').addEventListener('submit', function (e) {
+    const emailInput = document.querySelector('input[name="email"]');
+    const email = emailInput.value.trim();
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    if (!regex.test(email)) {
+        e.preventDefault();
+        alert('Veuillez entrer un email valide.');
+        emailInput.focus();
+    }
+});
+    </script>
+@endpush
 
 {{-- @section('script')
 <script>

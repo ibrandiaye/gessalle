@@ -55,6 +55,7 @@ class ClientController extends Controller
             'nom' => 'required|string',
             'prenom' => 'required|string',
             'date_naissance' => 'date',
+            'email' => 'required|email',
         ]);
       
         $client = Client::where('email', $request->email)->where('salle_id', Auth::user()->salle_id)->first();
