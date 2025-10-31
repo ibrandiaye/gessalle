@@ -52,7 +52,7 @@ class SouscriptionRepository extends RessourceRepository{
        ->join("clients","souscriptions.client_id","=","clients.id")
         ->join("offres","souscriptions.offre_id","=","offres.id")
         ->select("souscriptions.*","clients.nom","clients.prenom","clients.email",
-        "offres.nom as offre","clients.tel","clients.sexe","offres.prix")
+        "offres.nom as offre","clients.tel","clients.sexe","offres.prix as montant")
         ->where("clients.salle_id",$salle)
         ->whereBetween("souscriptions.created_at",[$start,$end])
         ->orderBy("souscriptions.id","desc")

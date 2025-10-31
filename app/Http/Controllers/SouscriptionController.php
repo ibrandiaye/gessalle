@@ -148,6 +148,7 @@ class SouscriptionController extends Controller
     public function createByClient($client_id)
     {
          $offres = $this->offreRepository->getAllBySalle(Auth::user()->salle_id);
+
          $client = $this->clientRepository->getById($client_id);
         return view("souscription.add-client",compact("client_id","offres",'client'));
     }
@@ -221,6 +222,7 @@ class SouscriptionController extends Controller
             {
                 $client = new Client();
                 $client->nom = "anonyme";
+                $client->sex= "N/A";
                 $client->tel = $request->tel;
                 $client->salle_id = $user->salle_id;
                 $client->save();
@@ -233,6 +235,7 @@ class SouscriptionController extends Controller
             {
                 $client = new Client();
                 $client->nom = "anonyme";
+                $client->sex= "N/A";
                 $client->salle_id = $user->salle_id;
                 $client->save();
             }
