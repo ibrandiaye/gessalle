@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Framework\Exception;
 
 
@@ -13,6 +14,10 @@ class RessourceRepository {
     }
     public  function getAll(){
         return $this->model->get();
+    }
+
+      public  function getAllBySalle($salle){
+        return DB::table("offres")->where('salle_id',$salle)->count();
     }
 
     public function store(Array $inputs)

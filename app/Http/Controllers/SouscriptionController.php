@@ -53,7 +53,7 @@ class SouscriptionController extends Controller
      */
     public function create()
     {
-        $offres = $this->offreRepository->getAll();
+        $offres = $this->offreRepository->getAllBySalle(Auth::user()->salle_id);
         $clients = $this->clientRepository->getAll();
         return view ('souscription.add',compact('offres','clients'));
     }
