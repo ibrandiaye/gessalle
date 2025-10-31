@@ -110,7 +110,7 @@ class SouscriptionController extends Controller
     public function edit($id)
     {
         $souscription = $this->souscriptionRepository->getById($id);
-         $offres = $this->offreRepository->getAll();
+         $offres = $this->offreRepository->getAllBySalle(Auth::user()->salle_id);
         $clients = $this->clientRepository->getAll();
         $client = $this->clientRepository->getById($souscription->client_id);
         return view('souscription.edit',compact('souscription','clients','offres','client'));
@@ -147,7 +147,7 @@ class SouscriptionController extends Controller
         //
     public function createByClient($client_id)
     {
-         $offres = $this->offreRepository->getAll();
+         $offres = $this->offreRepository->getAllBySalle(Auth::user()->salle_id);
          $client = $this->clientRepository->getById($client_id);
         return view("souscription.add-client",compact("client_id","offres",'client'));
     }
