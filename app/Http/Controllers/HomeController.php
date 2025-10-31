@@ -107,7 +107,7 @@ class HomeController extends Controller
         $souscriptions = $this->souscriptionRepository->getSouscriptionBySalleAnddate($user->salle_id,$request->debut,$request->fin);
         $souscriptionsTotal = 0;
         foreach ($souscriptions as $key => $value) {
-            $souscriptionsTotal += $value->prix;
+            $souscriptionsTotal += $value->montant;
         }
         return view("rapport",compact("depenses","debut","fin",
                     "depenseTotal","souscriptions","souscriptionsTotal"));
