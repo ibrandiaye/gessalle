@@ -57,7 +57,7 @@ class ClientController extends Controller
             'date_naissance' => 'date',
         ]);
       
-        $client = Client::where('email', $request->email)->first();
+        $client = Client::where('email', $request->email)->where('salle_id', Auth::user()->salle_id)->first();
         
        if ($client) {
             $client = $request->all();
